@@ -1,4 +1,4 @@
-package com.selenide.base;
+package com.selenide.core;
 
 import static com.codeborne.selenide.Selenide.$;
 
@@ -25,7 +25,11 @@ public class TaskManager {
     }
 
     public void clearCompleted() {
-        //// TODO: 14.09.2016
+        // TODO: 14.09.2016
+    }
+
+    public void deleteTask(String taskName){
+
     }
 
 }

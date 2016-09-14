@@ -10,6 +10,7 @@ import static com.codeborne.selenide.Selenide.open;
 /**
  * Created by Mikle on 14.09.2016.
  */
+
 public class BaseTestPage {
 
     @BeforeClass
@@ -23,6 +24,7 @@ public class BaseTestPage {
 
     @AfterClass
     public static void tearDown() {
+
         close();
     }
 }
