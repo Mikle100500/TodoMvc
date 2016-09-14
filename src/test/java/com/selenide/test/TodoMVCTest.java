@@ -1,8 +1,6 @@
-package com.selenide.introtest;
+package com.selenide.test;
 
 import org.junit.Test;
-import com.selenide.base.TaskManager;
-import static com.codeborne.selenide.Selenide.$;
 
 /**
  * Created by Mikle on 15.07.2016.
