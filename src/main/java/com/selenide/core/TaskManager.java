@@ -1,6 +1,5 @@
 package com.selenide.core;
 
-import com.codeborne.selenide.SelenideElement;
 import org.apache.xpath.operations.String;
 import org.openqa.selenium.By;
 
@@ -28,7 +27,7 @@ public class TaskManager {
     }
 
     public void clearCompleted() {
-        // TODO: 14.09.2016
+        $(By.id("clear-completed")).click();
     }
 
     public void deleteTask(String taskName) {
@@ -39,16 +38,15 @@ public class TaskManager {
         $(By.id("toggle-all")).click();
     }
 
-    public void clickAll(){
+    public void clickAll() {
         $(By.className("selected")).hover().click();
     }
 
-    public void clickActive(){
+    public void clickActive() {
         $(By.xpath("//a[contains(text(),'Active')]/..")).hover().click();
     }
 
-    public void clickCompleted(){
-
+    public void clickCompleted() {
         $(By.xpath("//a[contains(text(),'Completed')]")).hover().click();
 
     }
