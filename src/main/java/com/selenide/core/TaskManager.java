@@ -1,5 +1,6 @@
 package com.selenide.core;
 
+import com.codeborne.selenide.SelenideElement;
 import org.apache.xpath.operations.String;
 import org.openqa.selenium.By;
 
@@ -16,7 +17,7 @@ public class TaskManager {
 
     public void markTaskAsCompleted(java.lang.String taskName) {
         java.lang.String labelXpath = "//label[contains(text(), " + taskName + ")]/../input";
-        $(By.xpath(labelXpath));
+        $(By.xpath(labelXpath)).click();
 
     }
 
@@ -36,6 +37,20 @@ public class TaskManager {
 
     public void clickToggleAll() {
         $(By.id("toggle-all")).click();
+    }
+
+    public void clickAll(){
+        $(By.className("selected")).hover().click();
+    }
+
+    public void clickActive(){
+        $(By.xpath("//a[contains(text(),'Active')]/..")).hover().click();
+    }
+
+    public void clickCompleted(){
+
+        $(By.xpath("//a[contains(text(),'Completed')]")).hover().click();
+
     }
 
 }
