@@ -1,5 +1,6 @@
 package com.selenide.test;
 
+import com.selenide.core.TaskManager;
 import org.junit.Test;
 
 /**
@@ -9,6 +10,7 @@ public class TodoMVCTest extends BaseTestPage {
 
     @Test
     public void testTasksCreator() throws InterruptedException {
-        // TODO: 20.07.2016
+        TaskManager createTask = new TaskManager();
+        createTask.tasksCreator(5);
     }
 }
