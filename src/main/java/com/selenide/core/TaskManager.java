@@ -28,7 +28,7 @@ public class TaskManager {
         // TODO: 14.09.2016
     }
 
-    public void deleteTask(String taskName){
+    public void deleteTask(String taskName) {
 
     }
 
