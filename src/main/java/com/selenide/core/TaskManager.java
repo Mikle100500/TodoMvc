@@ -1,7 +1,6 @@
 package com.selenide.core;
 
 import com.codeborne.selenide.SelenideElement;
-import org.apache.xpath.operations.String;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.$;
@@ -24,14 +23,14 @@ public class TaskManager {
 
     // this overloaded method marks all tasks as completed
     public void markTaskAsCompleted() {
-        for (SelenideElement label : $$(By.className("toggle"))){
+        for (SelenideElement label : $$(By.className("toggle"))) {
             label.click();
         }
 
     }
 
     public void clearCompleted() {
-        $(By.id("clear-completed")).click();
+        $(By.id("clear-completed")).hover().click();
     }
 
     public void deleteTask(java.lang.String taskName) {

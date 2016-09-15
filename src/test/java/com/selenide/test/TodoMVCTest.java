@@ -13,18 +13,20 @@ public class TodoMVCTest extends BaseTest {
 
         testEntity.tasksCreator(4);
         testEntity.clickToggleAll();
-        testEntity.markTaskAsCompleted("task2");
-        testEntity.deleteTask("task2");
+//        testEntity.deleteTask("task2");
+        testEntity.markTaskAsCompleted("task4");
+        testEntity.clearCompleted();
         testEntity.markTaskAsCompleted();
-    }
-
-    @Test
-    public void testMarkTaskAsCompleted() throws InterruptedException {
-
-        testEntity.clickAll();
-        testEntity.clickActive();
-        testEntity.clickCompleted();
         testEntity.clearCompleted();
     }
+
+//    @Test
+//    public void testMarkTaskAsCompleted() throws InterruptedException {
+//
+//        testEntity.clickAll();
+//        testEntity.clickActive();
+//        testEntity.clickCompleted();
+//        testEntity.clearCompleted();
+//    }
 
 }
