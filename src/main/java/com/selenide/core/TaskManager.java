@@ -1,20 +1,22 @@
 package com.selenide.core;
 
+import org.apache.xpath.operations.String;
+import org.openqa.selenium.By;
+
 import static com.codeborne.selenide.Selenide.$;
 
-/**
- * Created by Mikle on 14.09.2016.
- */
+
 public class TaskManager {
 
     public void tasksCreator(int numOfTasks) {
-        for (int i = 1; i >= numOfTasks; i++) {
-            $("#new-todo").setValue("task" + i).pressEnter();
+        for (int i = 1; i <= numOfTasks; i++) {
+            $(By.id("new-todo")).setValue("task" + i).pressEnter();
         }
     }
 
-    public void markTaskAsCompleted(String teskName) {
-        // TODO: 14.09.2016
+    public void markTaskAsCompleted(java.lang.String taskName) {
+        java.lang.String labelXpath = "//label[contains(text(), " + taskName + ")]/../input";
+        $(By.xpath(labelXpath));
 
     }
 
@@ -29,7 +31,11 @@ public class TaskManager {
     }
 
     public void deleteTask(String taskName) {
+        // TODO: 15/09/2016
+    }
 
+    public void clickToggleAll() {
+        $(By.id("toggle-all")).click();
     }
 
 }

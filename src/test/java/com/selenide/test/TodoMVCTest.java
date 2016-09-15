@@ -3,14 +3,21 @@ package com.selenide.test;
 import com.selenide.core.TaskManager;
 import org.junit.Test;
 
-/**
- * Created by Mikle on 15.07.2016.
- */
 public class TodoMVCTest extends BaseTest {
+
+    private TaskManager testEntity = new TaskManager();
 
     @Test
     public void testTasksCreator() throws InterruptedException {
-        TaskManager createTask = new TaskManager();
-        createTask.tasksCreator(5);
+
+        testEntity.tasksCreator(4);
+
     }
+
+    @Test
+    public void testMarkTaskAsCompleted(){
+
+        testEntity.markTaskAsCompleted("task4");
+    }
+
 }
