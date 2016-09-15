@@ -12,12 +12,15 @@ public class TodoMVCTest extends BaseTest {
     public void testTaskCreator() throws InterruptedException {
 
         testEntity.tasksCreator(4);
-
+        testEntity.clickToggleAll();
+        testEntity.markTaskAsCompleted("task2");
+        testEntity.deleteTask("task2");
+        testEntity.markTaskAsCompleted();
     }
 
     @Test
     public void testMarkTaskAsCompleted() throws InterruptedException {
-        testEntity.markTaskAsCompleted("task2");
+
         testEntity.clickAll();
         testEntity.clickActive();
         testEntity.clickCompleted();

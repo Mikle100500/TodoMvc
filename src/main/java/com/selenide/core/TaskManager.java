@@ -1,9 +1,11 @@
 package com.selenide.core;
 
+import com.codeborne.selenide.SelenideElement;
 import org.apache.xpath.operations.String;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 
 
 public class TaskManager {
@@ -22,7 +24,9 @@ public class TaskManager {
 
     // this overloaded method marks all tasks as completed
     public void markTaskAsCompleted() {
-        // TODO: 14.09.2016
+        for (SelenideElement label : $$(By.className("toggle"))){
+            label.click();
+        }
 
     }
 
@@ -30,8 +34,10 @@ public class TaskManager {
         $(By.id("clear-completed")).click();
     }
 
-    public void deleteTask(String taskName) {
-        // TODO: 15/09/2016
+    public void deleteTask(java.lang.String taskName) {
+        java.lang.String focusOnTheTask = "//label[contains(text(), " + taskName + ")]";
+        SelenideElement deleteButton = $(By.xpath(focusOnTheTask)).hover();
+        deleteButton.$(By.className("destroy")).click();
     }
 
     public void clickToggleAll() {
@@ -39,15 +45,15 @@ public class TaskManager {
     }
 
     public void clickAll() {
-        $(By.className("selected")).hover().click();
+        $(By.className("selected")).click();
     }
 
     public void clickActive() {
-        $(By.xpath("//a[contains(text(),'Active')]/..")).hover().click();
+        $(By.xpath("//a[contains(text(),'Active')]/..")).click();
     }
 
     public void clickCompleted() {
-        $(By.xpath("//a[contains(text(),'Completed')]")).hover().click();
+        $(By.xpath("//a[contains(text(),'Completed')]")).click();
 
     }
 
