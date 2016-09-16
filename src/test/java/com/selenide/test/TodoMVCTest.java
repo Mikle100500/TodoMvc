@@ -1,14 +1,11 @@
 package com.selenide.test;
 
-import com.selenide.core.TaskManager;
 import org.junit.Test;
 
 import static java.lang.Thread.sleep;
 
 
 public class TodoMVCTest extends BaseTest {
-
-    private TaskManager testEntity = new TaskManager();
 
     @Test
     public void testTaskCreator() throws InterruptedException {
@@ -18,15 +15,36 @@ public class TodoMVCTest extends BaseTest {
     }
 
     @Test
-    public void testDeleteTask() throws InterruptedException{
+    public void testDeleteTask() throws InterruptedException {
 
         testEntity.deleteTask("task2");
-        sleep(2000); //being deleted later
+        sleep(1500);
     }
 
     @Test
-    public void testMarkTheTaskAsCompleted() throws InterruptedException{
+    public void testMarkTheTaskAsCompleted() throws InterruptedException {
 
+        testEntity.clickAll();
+        sleep(3000);
+        testEntity.markTaskAsCompleted("task4");
+        sleep(3000);
+    }
+
+    @Test
+    public void testDeleteCompleted() throws InterruptedException{
+
+        testEntity.clearCompleted();
+        sleep(3000);
+    }
+
+    @Test
+    public void testMarkAndDelete() throws InterruptedException{
+
+        testEntity.markTaskAsCompleted();
+        sleep(3000);
+        testEntity.clearCompleted();
+        sleep(3000);
 
     }
+
 }

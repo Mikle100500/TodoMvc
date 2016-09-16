@@ -1,6 +1,5 @@
 package com.selenide.core;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 
@@ -17,7 +16,7 @@ public class TaskManager {
     }
 
     public void markTaskAsCompleted(java.lang.String taskName) {
-        java.lang.String labelXpath = "//label[contains(text(), " + taskName + ")]/../input";
+        java.lang.String labelXpath = "//label[contains(text()," + "'" +taskName + "'" + ")]/../input";
         $(By.xpath(labelXpath)).click();
 
     }
@@ -31,7 +30,7 @@ public class TaskManager {
     }
 
     public void clearCompleted() {
-        $(By.id("clear-completed")).hover().click();
+        $(By.id("clear-completed")).click();
     }
 
     public void deleteTask(String taskName) {
