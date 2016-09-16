@@ -1,5 +1,6 @@
 package com.selenide.core;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 
@@ -33,10 +34,11 @@ public class TaskManager {
         $(By.id("clear-completed")).hover().click();
     }
 
-    public void deleteTask(java.lang.String taskName) {
-        java.lang.String focusOnTheTask = "//label[contains(text(), " + taskName + ")]";
+    public void deleteTask(String taskName) {
+        String focusOnTheTask = "//*[contains(text()," + "'" +taskName + "'" + ")]/..";
         SelenideElement deleteButton = $(By.xpath(focusOnTheTask)).hover();
-        deleteButton.$(By.className("destroy")).click();
+        String focusOnDelete = "//*[contains(text()," + "'" +taskName + "'" + ")]/../button";
+        deleteButton.$(By.xpath(focusOnDelete)).click();
     }
 
     public void clickToggleAll() {
