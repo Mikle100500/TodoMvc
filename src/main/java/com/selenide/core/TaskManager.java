@@ -16,12 +16,10 @@ public class TaskManager {
         }
     }
 
-    public void markTaskAsCompleted(java.lang.String taskName) {
+    public void markTaskAsCompleted(String taskName) {
 
-        java.lang.String labelXpath = "//label[contains(text()," + "'" + taskName + "'" + ")]/../input";
+        String labelXpath = "//label[contains(text()," + "'" + taskName + "'" + ")]/../input";
         $(By.xpath(labelXpath)).click();
-
-
     }
 
     // this overloaded method marks all tasks as completed
@@ -30,7 +28,6 @@ public class TaskManager {
         for (SelenideElement label : $$(By.className("toggle"))) {
             label.click();
         }
-
     }
 
     public void clearCompleted() {
