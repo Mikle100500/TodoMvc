@@ -5,12 +5,9 @@ import com.codeborne.selenide.SelenideElement;
 
 import java.lang.String;
 
-import org.openqa.selenium.By;
-
 import java.util.List;
 
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
@@ -21,8 +18,8 @@ public class TaskManagerPage {
 
     public void create(List<String> taskNames) {
 
-        for (String stringName : taskNames) {
-            $("#new-todo").setValue(stringName).pressEnter();
+        for (String name : taskNames) {
+            $("#new-todo").setValue(name).pressEnter();
         }
     }
 
