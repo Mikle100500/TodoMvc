@@ -10,6 +10,7 @@ import org.openqa.selenium.By;
 import java.util.List;
 
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
@@ -44,7 +45,7 @@ public class TaskManagerPage {
 
     public void delete(String taskName) {
 
-        tasksSheet.findBy(text(taskName)).find(".destroy").click();
+        tasksSheet.findBy(text(taskName)).hover().find(".destroy").click();
     }
 
 }

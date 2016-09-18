@@ -2,6 +2,7 @@ package com.todomvc.test;
 
 import com.todomvc.page.TaskManagerPage;
 import org.junit.Test;
+
 import java.util.Arrays;
 import java.util.List;
 
