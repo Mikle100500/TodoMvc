@@ -1,54 +1,50 @@
 package com.todomvc.page;
 
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import org.apache.xpath.operations.String;
+
+import java.lang.String;
+
 import org.openqa.selenium.By;
 
 import java.util.List;
 
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
 
 public class TaskManagerPage {
 
-    public void createTasks(List<String> taskNames) {
+    private ElementsCollection tasksSheet = $$(".view");
+
+    public void create(List<String> taskNames) {
 
         for (String stringName : taskNames) {
-            $("#new-todo").setValue(stringName.toString()).pressEnter();
+            $("#new-todo").setValue(stringName).pressEnter();
         }
     }
 
     public void switchTask(String taskName) {
 
-        java.lang.String labelXpath = "//label[contains(text()," + "'" + taskName + "'" + ")]/../input";
-        $(By.xpath(labelXpath)).click();
+        tasksSheet.findBy(text(taskName)).find(".toggle").click();
     }
 
-    // this overloaded method marks all tasks as completed
-    public void switchTask() {
+    public void switchAll() {
 
-        for (SelenideElement label : $$(By.className("toggle"))) {
-            label.click();
+        for (SelenideElement label : tasksSheet) {
+            label.$(".toggle").click();
         }
     }
 
     public void clearCompleted() {
 
-        $(By.id("clear-completed")).click();
+        $("#clear-completed").click();
     }
 
-    public void deleteTask(String taskName) {
+    public void delete(String taskName) {
 
-        java.lang.String focusOnTheTask = "//*[contains(text()," + "'" + taskName + "'" + ")]/..";
-        SelenideElement deleteButton = $(By.xpath(focusOnTheTask)).hover();
-        java.lang.String focusOnDelete = "//*[contains(text()," + "'" + taskName + "'" + ")]/../button";
-        deleteButton.$(By.xpath(focusOnDelete)).click();
+        tasksSheet.findBy(text(taskName)).find(".destroy").click();
     }
 
-
-    public void filterAll() {
-
-        $(By.className("selected")).click();
-    }
 }
