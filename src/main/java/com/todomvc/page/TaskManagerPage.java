@@ -7,6 +7,7 @@ import java.lang.String;
 
 import java.util.List;
 
+import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
@@ -14,25 +15,23 @@ import static com.codeborne.selenide.Selenide.$$;
 
 public class TaskManagerPage {
 
-    private ElementsCollection tasksSheet = $$(".view");
+    private ElementsCollection tasks = $$("#todo-list>li");
 
-    public void create(List<String> taskNames) {
+    public void create(String... taskNames) {
 
         for (String name : taskNames) {
             $("#new-todo").setValue(name).pressEnter();
         }
     }
 
-    public void switchTask(String taskName) {
+    public void toggle(String taskName) {
 
-        tasksSheet.findBy(text(taskName)).find(".toggle").click();
+        tasks.findBy(exactText(taskName)).find(".toggle").click();
     }
 
-    public void switchAll() {
+    public void toggleAll() {
 
-        for (SelenideElement label : tasksSheet) {
-            label.$(".toggle").click();
-        }
+        $("#toggle-all").click();
     }
 
     public void clearCompleted() {
@@ -42,7 +41,7 @@ public class TaskManagerPage {
 
     public void delete(String taskName) {
 
-        tasksSheet.findBy(text(taskName)).hover().find(".destroy").click();
+        tasks.findBy(exactText(taskName)).hover().find(".destroy").click();
     }
 
 }
