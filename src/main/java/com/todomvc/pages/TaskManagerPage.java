@@ -11,7 +11,7 @@ import static com.codeborne.selenide.Selenide.$$;
 
 public class TaskManagerPage {
 
-    private ElementsCollection tasks = $$("#todo-list>li");
+    public ElementsCollection tasks = $$("#todo-list>li");
 
     public void create(String... taskNames) {
 
