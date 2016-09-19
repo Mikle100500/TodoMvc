@@ -41,7 +41,7 @@ public class TaskManagerPage {
 
     public void delete(String taskName) {
 
-        tasks.findBy(exactText(taskName)).hover().find(".destroy").click();
+        tasks.findBy(text(taskName)).hover().find(".destroy").click();
     }
 
 }
