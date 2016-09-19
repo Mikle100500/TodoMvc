@@ -1,6 +1,6 @@
 package com.todomvc.test;
 
-import com.todomvc.page.TaskManagerPage;
+import com.todomvc.pages.TaskManagerPage;
 import org.junit.Test;
 
 import static com.codeborne.selenide.Selenide.$$;
