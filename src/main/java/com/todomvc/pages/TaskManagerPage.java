@@ -39,5 +39,4 @@ public class TaskManagerPage {
 
         tasks.findBy(exactText(taskName)).hover().find(".destroy").click();
     }
-
 }

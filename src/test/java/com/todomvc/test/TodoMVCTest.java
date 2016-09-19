@@ -18,7 +18,6 @@ public class TodoMVCTest {
         open("https://todomvc4tasj.herokuapp.com/");
 
         page.create("task1", "task2", "task3", "task4");
-        page.tasks.filter(exist).shouldHave(size(4));
         page.tasks.shouldHave(exactTexts("task1", "task2", "task3", "task4"));
 
         page.delete("task2");
