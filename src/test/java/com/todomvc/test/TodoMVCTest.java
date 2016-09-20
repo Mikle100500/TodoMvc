@@ -3,8 +3,8 @@ package com.todomvc.test;
 import com.todomvc.pages.TaskManagerPage;
 import org.junit.Test;
 
-import static com.codeborne.selenide.CollectionCondition.*;
-import static com.codeborne.selenide.Condition.exist;
+import static com.codeborne.selenide.CollectionCondition.empty;
+import static com.codeborne.selenide.CollectionCondition.exactTexts;
 import static com.codeborne.selenide.Selenide.open;
 
 
