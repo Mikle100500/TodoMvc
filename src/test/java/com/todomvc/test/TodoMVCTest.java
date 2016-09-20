@@ -18,14 +18,14 @@ public class TodoMVCTest {
         open("https://todomvc4tasj.herokuapp.com/");
 
         page.create("task1", "task2", "task3", "task4");
-        page.tasks.shouldHave(exactTexts("task1", "task2", "task3", "task4"));
+        page.assertTasksAre("task1", "task2", "task3", "task4");
 
         page.delete("task2");
-        page.tasks.shouldHave(exactTexts("task1", "task3", "task4"));
+        page.assertTasksAre("task1", "task3", "task4");
 
         page.toggle("task4");
         page.clearCompleted();
-        page.tasks.shouldHave(exactTexts("task1", "task3"));
+        page.assertTasksAre("task1", "task3");
 
         page.toggleAll();
         page.clearCompleted();

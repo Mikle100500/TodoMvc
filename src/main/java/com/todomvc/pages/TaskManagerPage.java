@@ -1,9 +1,11 @@
 package com.todomvc.pages;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 
 import java.lang.String;
 
+import static com.codeborne.selenide.CollectionCondition.exactTexts;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
@@ -38,5 +40,10 @@ public class TaskManagerPage {
     public void delete(String taskName) {
 
         tasks.findBy(exactText(taskName)).hover().find(".destroy").click();
+    }
+
+    public void assertTasksAre(String... tasksForCheck){
+
+        tasks.shouldHave(exactTexts(tasksForCheck));
     }
 }
