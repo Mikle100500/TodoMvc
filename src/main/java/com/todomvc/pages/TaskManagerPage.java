@@ -1,10 +1,8 @@
 package com.todomvc.pages;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 
-import java.lang.String;
-
+import static com.codeborne.selenide.CollectionCondition.empty;
 import static com.codeborne.selenide.CollectionCondition.exactTexts;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Selenide.$;
@@ -13,7 +11,7 @@ import static com.codeborne.selenide.Selenide.$$;
 
 public class TaskManagerPage {
 
-    public ElementsCollection tasks = $$("#todo-list>li");
+    private ElementsCollection tasks = $$("#todo-list>li");
 
     public void create(String... taskNames) {
 
@@ -46,4 +44,15 @@ public class TaskManagerPage {
 
         tasks.shouldHave(exactTexts(tasksForCheck));
     }
+
+    public void assertEmpty(){
+
+        tasks.shouldBe(empty);
+    }
+
+//    public void edit(String oldName, String newName){
+//
+//        tasks.find(exactText(oldName)).doubleClick().clear();
+//
+//    }
 }
