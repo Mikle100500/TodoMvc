@@ -1,9 +1,12 @@
 package com.todomvc.pages;
 
 import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.SelenideElement;
+import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.CollectionCondition.empty;
 import static com.codeborne.selenide.CollectionCondition.exactTexts;
+import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
@@ -48,6 +51,13 @@ public class TaskManagerPage {
     public void assertTasksEmpty(){
 
         tasks.shouldBe(empty);
+    }
+
+    public void edit(String oldName, String newName){
+
+        tasks.find(exactText(oldName)).doubleClick();
+        tasks.find(cssClass("active editing")).$(By.className("edit")).sendKeys(newName);
+
     }
 
 }
