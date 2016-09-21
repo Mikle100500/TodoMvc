@@ -18,9 +18,6 @@ public class TodoMVCTest {
         page.create("task1", "task2", "task3", "task4");
         page.assertTasksAre("task1", "task2", "task3", "task4");
 
-//        page.edit("task1", "task10");
-//        page.assertTasksAre("task10", "task2", "task3", "task4");
-
         page.delete("task2");
         page.assertTasksAre("task1", "task3", "task4");
 
@@ -30,6 +27,6 @@ public class TodoMVCTest {
 
         page.toggleAll();
         page.clearCompleted();
-        page.assertEmpty();
+        page.assertTasksEmpty();
     }
 }

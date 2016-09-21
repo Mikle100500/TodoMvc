@@ -40,19 +40,14 @@ public class TaskManagerPage {
         tasks.findBy(exactText(taskName)).hover().find(".destroy").click();
     }
 
-    public void assertTasksAre(String... tasksForCheck){
+    public void assertTasksAre(String... taskNames){
 
-        tasks.shouldHave(exactTexts(tasksForCheck));
+        tasks.shouldHave(exactTexts(taskNames));
     }
 
-    public void assertEmpty(){
+    public void assertTasksEmpty(){
 
         tasks.shouldBe(empty);
     }
 
-//    public void edit(String oldName, String newName){
-//
-//        tasks.find(exactText(oldName)).doubleClick().clear();
-//
-//    }
 }
