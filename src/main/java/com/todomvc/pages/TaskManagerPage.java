@@ -60,4 +60,23 @@ public class TaskManagerPage {
 
     }
 
+    public void filterAll(){
+
+        $(By.partialLinkText("#/")).click();
+
+    }
+
+    public void filterActive(){
+
+        $(By.partialLinkText("#/active")).click();
+
+    }
+
+    public void filterCompleted(){
+
+        $(By.partialLinkText("#/completed")).click();
+
+    }
+
+
 }
