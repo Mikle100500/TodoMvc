@@ -2,7 +2,9 @@ package com.todomvc.pages;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import com.sun.corba.se.impl.oa.poa.ActiveObjectMap;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 
 import static com.codeborne.selenide.CollectionCondition.empty;
 import static com.codeborne.selenide.CollectionCondition.exactTexts;
@@ -43,40 +45,50 @@ public class TaskManagerPage {
         tasks.findBy(exactText(taskName)).hover().find(".destroy").click();
     }
 
-    public void assertTasksAre(String... taskNames){
+    public void assertTasksAre(String... taskNames) {
 
         tasks.shouldHave(exactTexts(taskNames));
     }
 
-    public void assertTasksEmpty(){
+    public void assertTasksEmpty() {
 
         tasks.shouldBe(empty);
     }
 
-    public void edit(String oldName, String newName){
+    public void edit(String oldName, String newName) {
 
         tasks.find(exactText(oldName)).doubleClick();
-        tasks.find(cssClass("active editing")).$(By.className("edit")).sendKeys(newName);
-
+        tasks.find(cssClass("editing")).$(By.className("edit")).setValue(newName).sendKeys(Keys.ENTER);
     }
 
-    public void filterAll(){
+    public void filterAll() {
 
-        $(By.partialLinkText("#/")).click();
-
+        $(By.linkText("All")).click();
     }
 
-    public void filterActive(){
+    public void filterActive() {
 
-        $(By.partialLinkText("#/active")).click();
-
+        $(By.linkText("Active")).click();
     }
 
-    public void filterCompleted(){
+    public void filterCompleted() {
 
-        $(By.partialLinkText("#/completed")).click();
-
+        $(By.linkText("Completed")).click();
     }
 
+    public int countActive() {
+
+        return $$(".active").size();
+    }
+
+    public int countCompleted() {
+
+        return $$(".completed").size();
+    }
+
+    public int countAll() {
+
+        return $$("#todo-list>li").size();
+    }
 
 }
