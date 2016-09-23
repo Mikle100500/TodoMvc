@@ -58,7 +58,8 @@ public class TaskManagerPage {
     public void edit(String oldName, String newName) {
 
         tasks.find(exactText(oldName)).doubleClick();
-        tasks.find(cssClass("editing")).$(By.className("edit")).setValue(newName).sendKeys(Keys.ENTER);
+        SelenideElement editedTask = tasks.find(cssClass("editing")).$(By.className("edit"));
+        editedTask.setValue(newName).sendKeys(Keys.ENTER);
     }
 
     public void filterAll() {

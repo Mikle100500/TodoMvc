@@ -29,6 +29,7 @@ public class TodoMVCTest {
         page.clearCompleted();
         page.assertTasksEmpty();
 
+        // Use case starts from here
         page.create("task1", "task2", "task3");
         page.edit("task1", "task10");
         page.assertTasksAre("task10", "task2", "task3");
@@ -36,7 +37,7 @@ public class TodoMVCTest {
         page.filterAll();
         assert page.countAll() == 3;
 
-        page.toggle("task1");
+        page.toggle("task10");
         page.filterCompleted();
         assert page.countCompleted() == 1;
 
