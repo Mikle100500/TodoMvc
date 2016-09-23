@@ -1,10 +1,7 @@
 package com.todomvc.pages;
 
 import com.codeborne.selenide.ElementsCollection;
-import com.codeborne.selenide.SelenideElement;
-import com.sun.corba.se.impl.oa.poa.ActiveObjectMap;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 
 import static com.codeborne.selenide.CollectionCondition.empty;
 import static com.codeborne.selenide.CollectionCondition.exactTexts;
@@ -55,11 +52,10 @@ public class TaskManagerPage {
         tasks.shouldBe(empty);
     }
 
-    public void edit(String oldName, String newName) {
+    public void edit(String oldTaskName, String newTaskName) {
 
-        tasks.find(exactText(oldName)).doubleClick();
-        SelenideElement editedTask = tasks.find(cssClass("editing")).$(By.className("edit"));
-        editedTask.setValue(newName).sendKeys(Keys.ENTER);
+        tasks.find(exactText(oldTaskName)).doubleClick();
+        tasks.find(cssClass("editing")).$(".edit").setValue(newTaskName).pressEnter();
     }
 
     public void filterAll() {
