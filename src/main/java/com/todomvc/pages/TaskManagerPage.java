@@ -5,8 +5,7 @@ import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.CollectionCondition.empty;
 import static com.codeborne.selenide.CollectionCondition.exactTexts;
-import static com.codeborne.selenide.Condition.cssClass;
-import static com.codeborne.selenide.Condition.exactText;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
@@ -22,9 +21,12 @@ public class TaskManagerPage {
         }
     }
 
-    public void toggle(String taskName) {
-
-        tasks.findBy(exactText(taskName)).find(".toggle").click();
+    public void toggle(String... taskNames) {
+        for (String name : taskNames) {
+            if (isTasksVisible(name)) {
+                tasks.findBy(exactText(name)).find(".toggle").click();
+            }
+        }
     }
 
     public void toggleAll() {
@@ -37,19 +39,25 @@ public class TaskManagerPage {
         $("#clear-completed").click();
     }
 
-    public void delete(String taskName) {
-
-        tasks.findBy(exactText(taskName)).hover().find(".destroy").click();
+    public void delete(String... taskNames) {
+        for (String name : taskNames) {
+            if (isTasksVisible(name)) {
+                tasks.findBy(exactText(name)).hover().find(".destroy").click();
+            }
+        }
     }
 
     public void assertTasksAre(String... taskNames) {
 
-        tasks.shouldHave(exactTexts(taskNames));
+        if (isTasksVisible(taskNames)) {
+            tasks.shouldHave(exactTexts(taskNames));
+        }
     }
 
     public void assertTasksEmpty() {
-
-        tasks.shouldBe(empty);
+        if (isTasksVisible()) {
+            tasks.shouldBe(empty);
+        }
     }
 
     public void edit(String oldTaskName, String newTaskName) {
@@ -73,19 +81,14 @@ public class TaskManagerPage {
         $(By.linkText("Completed")).click();
     }
 
-    public int countActive() {
+    public int count() {
 
-        return $$(".active").size();
+        return tasks.filter(visible).size();
+
     }
 
-    public int countCompleted() {
+    public boolean isTasksVisible(String... taskNames) {
 
-        return $$(".completed").size();
+        return tasks.filter(visible).contains(taskNames);
     }
-
-    public int countAll() {
-
-        return $$("#todo-list>li").size();
-    }
-
 }

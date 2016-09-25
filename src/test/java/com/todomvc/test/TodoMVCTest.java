@@ -4,6 +4,7 @@ import com.todomvc.pages.TaskManagerPage;
 import org.junit.Test;
 
 import static com.codeborne.selenide.Selenide.open;
+import static junit.framework.TestCase.assertEquals;
 
 
 public class TodoMVCTest {
@@ -15,33 +16,22 @@ public class TodoMVCTest {
 
         open("https://todomvc4tasj.herokuapp.com/");
 
-        page.create("task1", "task2", "task3", "task4");
-        page.assertTasksAre("task1", "task2", "task3", "task4");
+        page.create("a", "b", "c");
+        page.edit("a", "a edited");
+        page.toggle("a edited", "b");
+        assertEquals(page.count(), 3);
 
-        page.delete("task2");
-        page.assertTasksAre("task1", "task3", "task4");
-
-        page.toggle("task4");
-        page.clearCompleted();
-        page.assertTasksAre("task1", "task3");
-
-        page.toggleAll();
-        page.clearCompleted();
-        page.assertTasksEmpty();
-
-        // Use case starts from here
-        page.create("task1", "task2", "task3");
-        page.edit("task1", "task10");
-        page.assertTasksAre("task10", "task2", "task3");
-
-        page.filterAll();
-        assert page.countAll() == 3;
-
-        page.toggle("task10");
         page.filterCompleted();
-        assert page.countCompleted() == 1;
+        page.toggle("b");
+        page.assertTasksAre("a edited");
 
         page.filterActive();
-        assert page.countActive() == 2;
+        page.toggleAll();
+        page.assertTasksEmpty();
+
+        page.filterAll();
+        page.delete("a edited", "c");
+        page.clearCompleted();
+
     }
 }
