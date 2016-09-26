@@ -1,6 +1,7 @@
 package com.todomvc.pages;
 
 import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.CollectionCondition.empty;
@@ -21,12 +22,9 @@ public class TaskManagerPage {
         }
     }
 
-    public void toggle(String... taskNames) {
-        for (String name : taskNames) {
-            if (isTasksVisible(name)) {
-                tasks.findBy(exactText(name)).find(".toggle").click();
-            }
-        }
+    public void toggle(String taskName) {
+
+        tasks.filter(visible).findBy(exactText(taskName)).find(".toggle").click();
     }
 
     public void toggleAll() {
@@ -41,29 +39,29 @@ public class TaskManagerPage {
 
     public void delete(String... taskNames) {
         for (String name : taskNames) {
-            if (isTasksVisible(name)) {
-                tasks.findBy(exactText(name)).hover().find(".destroy").click();
-            }
+
+            tasks.filter(visible).findBy(exactText(name)).hover().find(".destroy").click();
         }
     }
 
     public void assertTasksAre(String... taskNames) {
 
-        if (isTasksVisible(taskNames)) {
-            tasks.shouldHave(exactTexts(taskNames));
-        }
+
+        tasks.filter(visible).shouldHave(exactTexts(taskNames));
+
     }
 
     public void assertTasksEmpty() {
-        if (isTasksVisible()) {
-            tasks.shouldBe(empty);
-        }
+
+        tasks.filter(visible).shouldBe(empty);
+
     }
 
-    public void edit(String oldTaskName, String newTaskName) {
+    public SelenideElement startEdit(String oldTaskName, String newTaskName) {
 
-        tasks.find(exactText(oldTaskName)).doubleClick();
-        tasks.find(cssClass("editing")).$(".edit").setValue(newTaskName).pressEnter();
+        tasks.filter(visible).find(exactText(oldTaskName)).doubleClick();
+        return tasks.find(cssClass("editing")).$(".edit").setValue(newTaskName);
+
     }
 
     public void filterAll() {
@@ -79,16 +77,5 @@ public class TaskManagerPage {
     public void filterCompleted() {
 
         $(By.linkText("Completed")).click();
-    }
-
-    public int count() {
-
-        return tasks.filter(visible).size();
-
-    }
-
-    public boolean isTasksVisible(String... taskNames) {
-
-        return tasks.filter(visible).contains(taskNames);
     }
 }
