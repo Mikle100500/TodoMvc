@@ -24,7 +24,7 @@ public class TaskManagerPage {
 
     public void toggle(String taskName) {
 
-        tasks.filter(visible).findBy(exactText(taskName)).find(".toggle").click();
+        tasks.findBy(exactText(taskName)).find(".toggle").click();
     }
 
     public void toggleAll() {
@@ -37,31 +37,25 @@ public class TaskManagerPage {
         $("#clear-completed").click();
     }
 
-    public void delete(String... taskNames) {
-        for (String name : taskNames) {
+    public void delete(String taskName) {
 
-            tasks.filter(visible).findBy(exactText(name)).hover().find(".destroy").click();
-        }
+        tasks.findBy(exactText(taskName)).hover().find(".destroy").click();
     }
 
     public void assertTasksAre(String... taskNames) {
 
-
         tasks.filter(visible).shouldHave(exactTexts(taskNames));
-
     }
 
     public void assertTasksEmpty() {
 
         tasks.filter(visible).shouldBe(empty);
-
     }
 
     public SelenideElement startEdit(String oldTaskName, String newTaskName) {
 
-        tasks.filter(visible).find(exactText(oldTaskName)).doubleClick();
+        tasks.find(exactText(oldTaskName)).doubleClick();
         return tasks.find(cssClass("editing")).$(".edit").setValue(newTaskName);
-
     }
 
     public void filterAll() {

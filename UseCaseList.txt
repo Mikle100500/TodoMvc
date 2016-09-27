@@ -1,0 +1,37 @@
+
+<<< Draft Use Cases list >>>
+
+'All' filter:
+- create
+- edit
+- delete
+- cancel edit
+- toggle active to completed
+- toggle completed to active
+- toggle all to active
+- toggle all to completed
+- clear completed
+
+'Active' filter:
+- create
+- edit
+- delete
+- cancel edit
+- toggle active to completed
+- toggle all to completed
+
+'Completed' filter:
+- create
+- edit
+- delete
+- cancel edit
+- toggle completed to active
+- toggle all completed to active
+- clear completed
+
+General:
+- Navigate using filters (All, Active, Completed)
+- Count items left
+- Verify cash
+- Check the links on the main page
+- Check title
