@@ -5,33 +5,32 @@
 - create
 - edit
 - delete
-- cancel edit
-- toggle active to completed
-- toggle completed to active
-- toggle all to active
-- toggle all to completed
+- complete
+- activate
+- complete all
+- activate all
 - clear completed
 
 'Active' filter:
 - create
 - edit
 - delete
-- cancel edit
-- toggle active to completed
-- toggle all to completed
+- complete
+- complete all
+- clear completed
 
 'Completed' filter:
-- create
-- edit
 - delete
-- cancel edit
-- toggle completed to active
-- toggle all completed to active
+- activate
+- activate all
 - clear completed
 
 General:
 - Navigate using filters (All, Active, Completed)
 - Count items left
-- Verify cash
-- Check the links on the main page
-- Check title
+
+Additional edit operations:
+- cancel edit by press escape
+- confirm edit by press tab
+- confirm edit by click outside
+- delete by emptying text

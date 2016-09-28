@@ -2,6 +2,7 @@ package com.todomvc.pages;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import java.lang.String;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.CollectionCondition.empty;
@@ -50,6 +51,11 @@ public class TaskManagerPage {
     public void assertTasksEmpty() {
 
         tasks.filter(visible).shouldBe(empty);
+    }
+
+    public void assertItemsLeft(int itemsLeft){
+
+        $("strong").shouldHave(exactText(Integer.toString(itemsLeft)));
     }
 
     public SelenideElement startEdit(String oldTaskName, String newTaskName) {

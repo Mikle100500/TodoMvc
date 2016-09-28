@@ -16,18 +16,14 @@ public class TodoMVCTest {
         open("https://todomvc4tasj.herokuapp.com/");
 
         page.create("a");
-        page.assertTasksAre("a");
-
         page.startEdit("a", "a edited").pressEnter();
+        page.toggle("a edited");
         page.assertTasksAre("a edited");
 
-        page.toggle("a edited");
         page.filterActive();
         page.assertTasksEmpty();
 
         page.create("b");
-        page.assertTasksAre("b");
-
         page.startEdit("b", "b cancel edit").pressEscape();
         page.assertTasksAre("b");
 
@@ -37,10 +33,14 @@ public class TodoMVCTest {
         page.filterCompleted();
         page.assertTasksAre("a edited", "b");
 
-        page.delete("b");
-        page.assertTasksAre("a edited");
-
+        page.toggle("b");
         page.clearCompleted();
+        page.assertTasksEmpty();
+
+        page.filterAll();
+        page.assertItemsLeft(1);
+
+        page.delete("b");
         page.assertTasksEmpty();
 
     }
