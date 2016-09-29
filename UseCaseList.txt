@@ -26,7 +26,13 @@
 - clear completed
 
 General:
-- Navigate using filters (All, Active, Completed)
+- Navigate using filters (All, Active, Completed):
+    All -> Active
+        -> Completed
+    Active -> All
+           -> Completed
+    Completed -> All
+              -> Active
 - Count items left
 
 Additional edit operations:
