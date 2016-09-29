@@ -18,29 +18,29 @@ public class TodoMVCTest {
         page.create("a");
         page.startEdit("a", "a edited").pressEnter();
         page.toggle("a edited");
-        page.assertTasksAre("a edited");
+        page.assertTasks("a edited");
 
         page.filterActive();
-        page.assertTasksEmpty();
+        page.assertNoVisibleTasks();
 
         page.create("b");
         page.startEdit("b", "b cancel edit").pressEscape();
-        page.assertTasksAre("b");
+        page.assertTasks("b");
 
         page.toggleAll();
-        page.assertTasksEmpty();
+        page.assertNoVisibleTasks();
 
         page.filterCompleted();
-        page.assertTasksAre("a edited", "b");
+        page.assertVisibleTasks("a edited", "b");
 
         page.toggle("b");
         page.clearCompleted();
-        page.assertTasksEmpty();
+        page.assertNoVisibleTasks();
         page.assertItemsLeft(1);
 
         page.filterAll();
         page.delete("b");
-        page.assertTasksEmpty();
+        page.assertNoVisibleTasks();
 
     }
 }

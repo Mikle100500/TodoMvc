@@ -43,12 +43,16 @@ public class TaskManagerPage {
         tasks.findBy(exactText(taskName)).hover().find(".destroy").click();
     }
 
-    public void assertTasksAre(String... taskNames) {
+    public void assertTasks(String... taskNames) {
+
+        tasks.shouldHave(exactTexts(taskNames));
+    }
+    public void assertVisibleTasks(String... taskNames) {
 
         tasks.filter(visible).shouldHave(exactTexts(taskNames));
     }
 
-    public void assertTasksEmpty() {
+    public void assertNoVisibleTasks() {
 
         tasks.filter(visible).shouldBe(empty);
     }
