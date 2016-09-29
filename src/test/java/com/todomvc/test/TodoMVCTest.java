@@ -25,7 +25,7 @@ public class TodoMVCTest {
 
         page.create("b");
         page.startEdit("b", "b cancel edit").pressEscape();
-        page.assertTasks("b");
+        page.assertVisibleTasks("b");
 
         page.toggleAll();
         page.assertNoVisibleTasks();
@@ -34,6 +34,8 @@ public class TodoMVCTest {
         page.assertVisibleTasks("a edited", "b");
 
         page.toggle("b");
+        page.assertVisibleTasks("a edited");
+
         page.clearCompleted();
         page.assertNoVisibleTasks();
         page.assertItemsLeft(1);

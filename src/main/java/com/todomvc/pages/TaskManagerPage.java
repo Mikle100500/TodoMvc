@@ -24,42 +24,35 @@ public class TaskManagerPage {
     }
 
     public void toggle(String taskName) {
-
         tasks.findBy(exactText(taskName)).find(".toggle").click();
     }
 
     public void toggleAll() {
-
         $("#toggle-all").click();
     }
 
     public void clearCompleted() {
-
         $("#clear-completed").click();
     }
 
     public void delete(String taskName) {
-
         tasks.findBy(exactText(taskName)).hover().find(".destroy").click();
     }
 
     public void assertTasks(String... taskNames) {
-
         tasks.shouldHave(exactTexts(taskNames));
     }
-    public void assertVisibleTasks(String... taskNames) {
 
+    public void assertVisibleTasks(String... taskNames) {
         tasks.filter(visible).shouldHave(exactTexts(taskNames));
     }
 
     public void assertNoVisibleTasks() {
-
         tasks.filter(visible).shouldBe(empty);
     }
 
     public void assertItemsLeft(int itemsLeft){
-
-        $("strong").shouldHave(exactText(Integer.toString(itemsLeft)));
+        $("#todo-count>strong").shouldHave(exactText(Integer.toString(itemsLeft)));
     }
 
     public SelenideElement startEdit(String oldTaskName, String newTaskName) {
@@ -69,17 +62,14 @@ public class TaskManagerPage {
     }
 
     public void filterAll() {
-
         $(By.linkText("All")).click();
     }
 
     public void filterActive() {
-
         $(By.linkText("Active")).click();
     }
 
     public void filterCompleted() {
-
         $(By.linkText("Completed")).click();
     }
 }
