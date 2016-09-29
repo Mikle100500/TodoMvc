@@ -36,10 +36,9 @@ public class TodoMVCTest {
         page.toggle("b");
         page.clearCompleted();
         page.assertTasksEmpty();
-
-        page.filterAll();
         page.assertItemsLeft(1);
 
+        page.filterAll();
         page.delete("b");
         page.assertTasksEmpty();
 
