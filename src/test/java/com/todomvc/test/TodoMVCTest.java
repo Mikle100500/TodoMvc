@@ -3,6 +3,7 @@ package com.todomvc.test;
 import com.todomvc.pages.TaskManagerPage;
 import org.junit.Test;
 
+import static com.codeborne.selenide.Selenide.close;
 import static com.codeborne.selenide.Selenide.open;
 
 
@@ -44,5 +45,37 @@ public class TodoMVCTest {
         page.delete("b");
         page.assertNoVisibleTasks();
 
+        close();
+
     }
+
+    @Test
+    public void testActivateAll(){
+
+        open("https://todomvc4tasj.herokuapp.com/");
+
+        page.create("a");
+        page.toggleAll();
+        page.filterCompleted();
+        page.assertVisibleTasks("a");
+
+        page.toggleAll();
+        page.filterActive();
+        page.assertVisibleTasks("a");
+
+        close();
+    }
+
+    @Test
+    public void testEditByTab(){
+
+        open("https://todomvc4tasj.herokuapp.com/");
+
+        page.create("a");
+        page.startEdit("a", "a edited").pressTab();
+        page.assertVisibleTasks("a edited");
+
+        close();
+    }
+
 }
