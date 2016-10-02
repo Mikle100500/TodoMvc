@@ -1,9 +1,11 @@
 package com.todomvc.test;
 
 import com.todomvc.pages.TaskManagerPage;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
-import static com.codeborne.selenide.Selenide.close;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static com.codeborne.selenide.Selenide.open;
 
 
@@ -11,10 +13,18 @@ public class TodoMVCTest {
 
     private TaskManagerPage page = new TaskManagerPage();
 
+    @Before
+    public void setUp() {
+        open("https://todomvc4tasj.herokuapp.com/");
+    }
+
+    @After
+    public void cleanUp() {
+        executeJavaScript("localStorage.clear()");
+    }
+
     @Test
     public void testTasksCommonFlow() {
-
-        open("https://todomvc4tasj.herokuapp.com/");
 
         page.create("a");
         page.startEdit("a", "a edited").pressEnter();
@@ -44,15 +54,10 @@ public class TodoMVCTest {
         page.filterAll();
         page.delete("b");
         page.assertNoVisibleTasks();
-
-        close();
-
     }
 
     @Test
-    public void testActivateAll(){
-
-        open("https://todomvc4tasj.herokuapp.com/");
+    public void testActivateAll() {
 
         page.create("a");
         page.toggleAll();
@@ -62,20 +67,14 @@ public class TodoMVCTest {
         page.toggleAll();
         page.filterActive();
         page.assertVisibleTasks("a");
-
-        close();
     }
 
     @Test
-    public void testEditByTab(){
-
-        open("https://todomvc4tasj.herokuapp.com/");
+    public void testEditByTab() {
 
         page.create("a");
         page.startEdit("a", "a edited").pressTab();
         page.assertVisibleTasks("a edited");
-
-        close();
     }
 
 }
