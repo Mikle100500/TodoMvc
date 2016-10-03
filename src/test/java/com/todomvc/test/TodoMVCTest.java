@@ -27,21 +27,20 @@ public class TodoMVCTest {
     public void testTasksCommonFlow() {
 
         page.create("a");
-        page.startEdit("a", "a edited").pressEnter();
-        page.toggle("a edited");
-        page.assertTasks("a edited");
+        page.assertTasks("a");
 
         page.filterActive();
-        page.assertNoVisibleTasks();
+        page.assertVisibleTasks("a");
 
+        page.create("b");
         page.toggleAll();
         page.assertNoVisibleTasks();
 
         page.filterCompleted();
-        page.assertVisibleTasks("a edited", "b");
+        page.assertVisibleTasks("a", "b");
 
         page.toggle("b");
-        page.assertVisibleTasks("a edited");
+        page.assertVisibleTasks("a");
 
         page.clearCompleted();
         page.assertNoVisibleTasks();
