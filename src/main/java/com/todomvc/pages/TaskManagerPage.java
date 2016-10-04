@@ -2,7 +2,9 @@ package com.todomvc.pages;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+
 import java.lang.String;
+
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.CollectionCondition.empty;
@@ -51,7 +53,7 @@ public class TaskManagerPage {
         tasks.filter(visible).shouldBe(empty);
     }
 
-    public void assertItemsLeft(int itemsLeft){
+    public void assertItemsLeft(int itemsLeft) {
         $("#todo-count>strong").shouldHave(exactText(Integer.toString(itemsLeft)));
     }
 

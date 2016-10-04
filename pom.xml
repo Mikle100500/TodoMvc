@@ -6,6 +6,7 @@
 
     <groupId>com.selenide.introtest</groupId>
     <artifactId>todomvctest</artifactId>
+    <version>1.0-SNAPSHOT</version>
 
     <properties>
         <allure.version>1.4.23.HOTFIX1</allure.version>
