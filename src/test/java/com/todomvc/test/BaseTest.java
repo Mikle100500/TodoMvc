@@ -19,6 +19,11 @@ public class BaseTest {
         open("https://todomvc4tasj.herokuapp.com/");
     }
 
+    @Before
+    public void clearScreenshotList(){
+        Screenshots.screenshots.getScreenshots().clear();
+    }
+
     @After
     public void cleanUp() {
         executeJavaScript("localStorage.clear()");
