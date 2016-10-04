@@ -1,47 +1,12 @@
 package com.todomvc.test;
 
-import com.codeborne.selenide.Screenshots;
-import com.google.common.io.Files;
 import com.todomvc.pages.TaskManagerPage;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-import ru.yandex.qatools.allure.annotations.Attachment;
-
-import java.io.File;
-import java.io.IOException;
-
-import static com.codeborne.selenide.Selenide.executeJavaScript;
-import static com.codeborne.selenide.Selenide.open;
 
 
-public class TodoMVCTest {
+public class TodoMVCTest extends BaseTest {
 
     private TaskManagerPage page = new TaskManagerPage();
-
-    @Before
-    public void setUp() {
-        open("https://todomvc4tasj.herokuapp.com/");
-    }
-
-    @After
-    public void cleanUp() {
-        executeJavaScript("localStorage.clear()");
-    }
-
-    @After
-    public void tearDown() throws IOException {
-        File lastSelenideScreenshot = Screenshots.getLastScreenshot();
-        if (lastSelenideScreenshot != null) {
-            screenshot(Files.toByteArray(lastSelenideScreenshot));
-        }
-
-    }
-
-    @Attachment(type = "image/png")
-    public static byte[] screenshot(byte[] dataForScreenshot) {
-        return dataForScreenshot;
-    }
 
 
     @Test
