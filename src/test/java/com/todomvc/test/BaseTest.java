@@ -7,7 +7,7 @@ import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static com.codeborne.selenide.Selenide.open;
 
 
-public class BaseTest extends AllureScreenshotTest {
+public class BaseTest extends AllureAttachmentTest {
 
     @Before
     public void setUp() {
