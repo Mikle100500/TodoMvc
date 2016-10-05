@@ -38,17 +38,18 @@ public class TodoMVCTest extends BaseTest {
 
 
     @Test
-    public void testEditByTab() {
+    public void testEditAtAll() {
 
         //given
         page.create("a");
 
-        page.startEdit("a", "a edited").pressTab();
+        page.startEdit("a", "a edited").pressEnter();
         page.assertVisibleTasks("a edited");
+        page.assertItemsLeft(1);
     }
 
     @Test
-    public void testCancelEditByEsc() {
+    public void testCancelEditByEscAtActive() {
 
         //given
         page.create("b");
@@ -72,8 +73,5 @@ public class TodoMVCTest extends BaseTest {
         page.assertNoVisibleTasks();
         page.assertItemsLeft(4);
 
-        page.filterActive();
-        page.assertVisibleTasks("a", "b", "c", "d");
     }
-
 }
