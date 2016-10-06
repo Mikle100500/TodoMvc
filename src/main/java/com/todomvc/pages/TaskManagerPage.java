@@ -5,6 +5,7 @@ import com.codeborne.selenide.SelenideElement;
 
 import java.lang.String;
 
+import com.todomvc.helpers.Helpers;
 import org.openqa.selenium.By;
 import ru.yandex.qatools.allure.annotations.Step;
 
@@ -15,7 +16,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
 
-public class TaskManagerPage {
+public class TaskManagerPage extends Helpers{
 
     private ElementsCollection tasks = $$("#todo-list>li");
 
