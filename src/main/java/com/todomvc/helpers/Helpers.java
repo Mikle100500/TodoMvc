@@ -9,9 +9,9 @@ public class Helpers {
 
     private final Map<String, String> status = new HashMap<String, String>() {{
 
-        status.put("All", "");
-        status.put("Active", "false");
-        status.put("Completed", "true");
+        put("All", "");
+        put("Active", "false");
+        put("Completed", "true");
     }};
 
 
