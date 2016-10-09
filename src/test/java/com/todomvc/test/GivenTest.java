@@ -9,6 +9,5 @@ public class GivenTest extends BaseTest {
     @Test
     public void testGiven() throws InterruptedException {
         page.given("Active", "newA", "newB", "newC");
-        sleep(7000);
     }
 }
