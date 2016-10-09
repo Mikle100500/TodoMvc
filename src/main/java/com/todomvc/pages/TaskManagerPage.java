@@ -20,6 +20,8 @@ public class TaskManagerPage extends Helpers{
 
     private ElementsCollection tasks = $$("#todo-list>li");
 
+
+
     @Step
     public void create(String... taskNames) {
 

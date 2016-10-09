@@ -1,24 +1,33 @@
 package com.todomvc.helpers;
 
+import com.codeborne.selenide.Selenide;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class Helpers {
 
-    private enum TaskStatus{
-        All(""),
-        ACTIVE("false"),
-        COMPLETED("true");
+    private final Map<String, String> status = new HashMap<String, String>() {{
 
-        private final String status;
+        status.put("All", "");
+        status.put("Active", "false");
+        status.put("Completed", "true");
+    }};
 
-        TaskStatus(String status){
-            this.status = status;
+    //set active task as default
+    //localStorage.setItem("todos-troopjs", "[{\"active\":false, \"title\":\"new\"}]", "[{\"active\":false, \"title\":\"newNew\"}]" )
+    // "[{\"active\":false, \"title\":\"new\"}]"
+
+    public void given(String taskStatus, String... taskNames) {
+
+        StringBuilder queryToExecute = new StringBuilder("localStorage.setItem(\"todos-troopjs\", \"[{\\\"active\\\":");
+
+        for (String name : taskNames) {
+
+            queryToExecute.append(status.get(taskStatus)).append(", \\\"title\\\":\\\"").append(name).append("\\\"}]\")");
         }
-    }
 
-    private void teskBuilder(String taskName, String taskStatus){
-        // TODO: 06/10/2016
-    }
-
-    public void given(){
-        // TODO: 06/10/2016
+        Selenide.executeJavaScript(queryToExecute.toString());
+        Selenide.refresh();
     }
 }

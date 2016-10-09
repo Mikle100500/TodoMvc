@@ -6,9 +6,6 @@ import org.junit.Test;
 
 public class TodoMVCTest extends BaseTest {
 
-    private TaskManagerPage page = new TaskManagerPage();
-
-
     @Test
     public void testTasksCommonFlow() {
 
