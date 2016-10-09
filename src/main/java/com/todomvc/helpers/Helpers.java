@@ -14,7 +14,7 @@ public class Helpers {
         status.put("Completed", "true");
     }};
 
-    //set active task as default
+
     //localStorage.setItem("todos-troopjs", "[{\"active\":false, \"title\":\"new\"}]", "[{\"active\":false, \"title\":\"newNew\"}]" )
     // "[{\"active\":false, \"title\":\"new\"}]"
 
