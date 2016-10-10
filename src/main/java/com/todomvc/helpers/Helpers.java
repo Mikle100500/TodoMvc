@@ -5,7 +5,6 @@ import com.codeborne.selenide.Selenide;
 public class Helpers {
 
 
-
     // localStorage.setItem('todos-troopjs','[
     // {"completed":true,"title":"a"},
     // {"active":false,"title":"b"},
@@ -13,13 +12,16 @@ public class Helpers {
     // ]')
 
 
+    //localStorage.setItem('todos-troopjs','[{"completed":ACTIVE,"title":test}]')
 
-    public void given(String taskStatus, String... taskNames) {
+    public void given(TaskBuilder task) {
 
-        String queryToExecute = "localStorage.setItem('todos-troopjs','[";
+        String queryToExecute = "localStorage.setItem('todos-troopjs','["
+                                + "{\"completed\":" + task.getTaskStatus() + ",\"title\":\"" + task.getTaskName()
+                                +"\"}]')";
 
-
-        Selenide.executeJavaScript(queryToExecute.toString());
+        System.out.print("Query is: " + queryToExecute);
+        Selenide.executeJavaScript(queryToExecute);
         Selenide.refresh();
     }
 }
