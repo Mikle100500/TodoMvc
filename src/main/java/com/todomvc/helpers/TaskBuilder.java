@@ -22,7 +22,7 @@ public class TaskBuilder {
         return taskStatus;
     }
 
-    public static TaskBuilder buildTask(TaskStatus taskStatus, String taskName){
+    public static TaskBuilder buildTask(String taskName, TaskStatus taskStatus){
         return new TaskBuilder(taskName, taskStatus);
     }
 

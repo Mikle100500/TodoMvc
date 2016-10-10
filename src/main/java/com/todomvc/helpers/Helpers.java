@@ -17,8 +17,11 @@ public class Helpers {
     public void given(TaskBuilder task) {
 
         String queryToExecute = "localStorage.setItem('todos-troopjs','["
-                                + "{\"completed\":" + task.getTaskStatus() + ",\"title\":\"" + task.getTaskName()
-                                +"\"}]')";
+                + "{\"completed\":"
+                + task.getTaskStatus()
+                + ",\"title\":\""
+                + task.getTaskName()
+                + "\"}]')";
 
         System.out.print("Query is: " + queryToExecute);
         Selenide.executeJavaScript(queryToExecute);

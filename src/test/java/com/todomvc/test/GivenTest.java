@@ -12,7 +12,7 @@ public class GivenTest extends BaseTest {
 
     @Test
     public void testGiven() throws InterruptedException {
-        page.given(buildTask(ACTIVE, "test"));
+        page.given(buildTask("test", ACTIVE));
         sleep(4000);
         page.given(new TaskBuilder("test2", COMPLETED));
         sleep(4000);
