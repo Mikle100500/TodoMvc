@@ -12,7 +12,8 @@ public class GivenTest extends BaseTest {
     @Test
     public void testGiven() throws InterruptedException {
 
-        page.given(build("test", ACTIVE));
-        page.given(new TaskBuilder("test2", COMPLETED));
+//        page.given(build("test", ACTIVE));
+//        page.given(new TaskBuilder("test2", COMPLETED));
+        page.given(build(ACTIVE, "a", "b", "c"));
     }
 }

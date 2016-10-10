@@ -2,6 +2,8 @@ package com.todomvc.helpers;
 
 import com.codeborne.selenide.Selenide;
 
+import java.util.List;
+
 public class Helpers {
 
 
@@ -31,19 +33,20 @@ public class Helpers {
     }
 
     // redo
-    public void given(TaskStatus statusOfAll, TaskBuilder... tasks) {
+    public void given(List<TaskBuilder> tasks) {
 
-        String queryToExecute = "localStorage.setItem('todos-troopjs','[";
-        String queryBuilder = "{\"completed\":";
+        String queryToExecute = "localStorage.setItem('todos-troopjs','";
+        String queryBuilder = "[";
 
         for (TaskBuilder task : tasks) {
-            queryBuilder += ","
-                    + "{\"completed\":"
+            queryBuilder += "{\"completed\":"
+                    + task.getStatus()
                     + ",\"title\":\""
                     + task.getName()
-                    + "\"}";
+                    + "\"},";
         }
-
+        System.out.print("Query: " + queryBuilder.substring(0, queryBuilder.length() - 1));
+        queryBuilder.substring(0, queryBuilder.length() - 1);
         queryToExecute = queryToExecute + queryBuilder + "]')";
 
         System.out.print("Query is: " + queryToExecute);
