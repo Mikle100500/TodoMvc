@@ -7,7 +7,10 @@ public class Helpers {
 
     // localStorage.setItem('todos-troopjs','[
     // {"completed":true,"title":"a"},
+
     // {"active":false,"title":"b"},
+
+
     // {"completed":true,"title":"c"}
     // ]')
 
@@ -18,10 +21,30 @@ public class Helpers {
 
         String queryToExecute = "localStorage.setItem('todos-troopjs','["
                 + "{\"completed\":"
-                + task.getTaskStatus()
+                + task.getStatus()
                 + ",\"title\":\""
-                + task.getTaskName()
+                + task.getName()
                 + "\"}]')";
+
+        System.out.print("Query is: " + queryToExecute);
+        Selenide.executeJavaScript(queryToExecute);
+        Selenide.refresh();
+    }
+
+    public void given(TaskStatus statusOfAll, TaskBuilder... tasks) {
+
+        String queryToExecute = "localStorage.setItem('todos-troopjs','[";
+        String queryBuilder = "{\"completed\":";
+
+        for (TaskBuilder task : tasks) {
+            queryBuilder += ","
+                    + "{\"completed\":"
+                    + ",\"title\":\""
+                    + task.getName()
+                    + "\"}";
+        }
+
+        queryToExecute = queryToExecute + queryBuilder + "]')";
 
         System.out.print("Query is: " + queryToExecute);
         Selenide.executeJavaScript(queryToExecute);

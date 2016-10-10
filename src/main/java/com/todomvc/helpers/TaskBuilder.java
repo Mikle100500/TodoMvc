@@ -5,34 +5,35 @@ import java.util.List;
 
 public class TaskBuilder {
 
-    private String taskName;
-    private TaskStatus taskStatus;
+    private String name;
+    private TaskStatus status;
 
-    public TaskBuilder(String taskName, TaskStatus taskStatus){
+    public TaskBuilder(String name, TaskStatus status){
 
-        this.taskName = taskName;
-        this.taskStatus = taskStatus;
+        this.name = name;
+        this.status = status;
     }
 
-    public String getTaskName() {
-        return taskName;
+    public String getName() {
+        return name;
     }
 
-    public TaskStatus getTaskStatus() {
-        return taskStatus;
+    public TaskStatus getStatus() {
+        return status;
     }
 
-    public static TaskBuilder buildTask(String taskName, TaskStatus taskStatus){
+    public static TaskBuilder build(String taskName, TaskStatus taskStatus){
         return new TaskBuilder(taskName, taskStatus);
     }
 
-    public static List<TaskBuilder> buildTask(TaskStatus taskStatus, String... taskNames){
+    public static List<TaskBuilder> build(TaskStatus taskStatus, String... taskNames){
 
         List<TaskBuilder> tasks = new ArrayList<TaskBuilder>();
 
         for (String task : taskNames) {
             tasks.add(new TaskBuilder(task, taskStatus));
         }
+
         return tasks;
     }
 }
