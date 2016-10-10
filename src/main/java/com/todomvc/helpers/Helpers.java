@@ -26,11 +26,11 @@ public class Helpers {
                 + task.getName()
                 + "\"}]')";
 
-        System.out.print("Query is: " + queryToExecute);
         Selenide.executeJavaScript(queryToExecute);
         Selenide.refresh();
     }
 
+    // redo
     public void given(TaskStatus statusOfAll, TaskBuilder... tasks) {
 
         String queryToExecute = "localStorage.setItem('todos-troopjs','[";
