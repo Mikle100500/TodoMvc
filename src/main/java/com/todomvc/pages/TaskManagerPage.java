@@ -63,6 +63,7 @@ public class TaskManagerPage extends Helpers{
     }
 
     public void assertItemsLeft(int itemsLeft) {
+        
         $("#todo-count>strong").shouldHave(exactText(Integer.toString(itemsLeft)));
     }
 
