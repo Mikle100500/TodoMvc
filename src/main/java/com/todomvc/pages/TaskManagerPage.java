@@ -63,7 +63,7 @@ public class TaskManagerPage extends Helpers{
     }
 
     public void assertItemsLeft(int itemsLeft) {
-        
+
         $("#todo-count>strong").shouldHave(exactText(Integer.toString(itemsLeft)));
     }
 
@@ -75,9 +75,7 @@ public class TaskManagerPage extends Helpers{
     }
 
     @Step
-    public void filterAll() {
-        $(By.linkText("All")).click();
-    }
+    public void filterAll() { $(By.linkText("All")).click(); }
 
     @Step
     public void filterActive() {
