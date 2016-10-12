@@ -22,6 +22,7 @@ public class GivenHelpers {
 
         ensureURL();
         Selenide.executeJavaScript("localStorage.clear()");
+        Selenide.refresh();
     }
 
     public static void given(List<Task> tasks, String navigateToFilter) {
