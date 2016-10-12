@@ -27,7 +27,6 @@ public class GivenHelpers {
     public static void given(List<Task> tasks, String navigateToFilter) {
 
         ensureURL();
-
         Selenide.executeJavaScript("localStorage.clear()");
 
         String queryToExecute = "localStorage.setItem('todos-troopjs','[";
