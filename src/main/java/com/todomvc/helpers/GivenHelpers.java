@@ -5,13 +5,26 @@ import com.codeborne.selenide.Selenide;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.todomvc.pages.TaskManagerPage.filterActive;
-import static com.todomvc.pages.TaskManagerPage.filterAll;
-import static com.todomvc.pages.TaskManagerPage.filterCompleted;
+import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.WebDriverRunner.url;
+import static com.todomvc.pages.TaskManagerPage.*;
 
 public class GivenHelpers {
 
+    private static void ensureURL() {
+
+        if (!url().equals("https://todomvc4tasj.herokuapp.com/")) {
+            open("https://todomvc4tasj.herokuapp.com/");
+        }
+    }
+
+    public static void given(){
+        ensureURL();
+    }
+
     public static void given(List<Task> tasks, String navigateToFilter) {
+
+        ensureURL();
 
         Selenide.executeJavaScript("localStorage.clear()");
 
@@ -37,7 +50,7 @@ public class GivenHelpers {
         } else if (navigateToFilter.equals("Active")) {
             filterActive();
 
-        } else if (navigateToFilter.equals("Completed")){
+        } else if (navigateToFilter.equals("Completed")) {
             filterCompleted();
         }
 
@@ -48,13 +61,13 @@ public class GivenHelpers {
         private String name;
         private TaskStatus status;
 
-        public Task(TaskStatus status, String name){
+        public Task(TaskStatus status, String name) {
 
             this.name = name;
             this.status = status;
         }
 
-        public static List<Task> build(TaskStatus taskStatus, String... taskNames){
+        public static List<Task> build(TaskStatus taskStatus, String... taskNames) {
 
             List<Task> tasks = new ArrayList<Task>();
 

@@ -1,20 +1,20 @@
 package com.todomvc.test;
 
 import com.todomvc.pages.TaskManagerPage;
-import com.todomvc.testconfigs.BaseTest;
 import org.junit.Test;
 
-import static com.todomvc.pages.TaskManagerPage.filterActive;
-import static com.todomvc.pages.TaskManagerPage.filterAll;
-import static com.todomvc.pages.TaskManagerPage.filterCompleted;
+import static com.todomvc.helpers.GivenHelpers.given;
+import static com.todomvc.pages.TaskManagerPage.*;
 
 
-public class TodoMVCTest extends BaseTest {
+public class TodoMVCTest {
 
     private TaskManagerPage page = new TaskManagerPage();
 
     @Test
     public void testTasksCommonFlow() {
+
+        given();
 
         page.create("a");
         page.assertTasks("a");

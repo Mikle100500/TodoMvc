@@ -1,16 +1,15 @@
 package com.todomvc.test;
 
 import com.todomvc.pages.TaskManagerPage;
-import com.todomvc.testconfigs.BaseTest;
 import org.junit.Test;
 
 import static com.codeborne.selenide.Selenide.$;
-import static com.todomvc.helpers.GivenHelpers.given;
 import static com.todomvc.helpers.GivenHelpers.Task.build;
+import static com.todomvc.helpers.GivenHelpers.given;
 import static com.todomvc.helpers.TaskStatus.ACTIVE;
 import static com.todomvc.helpers.TaskStatus.COMPLETED;
 
-public class CompletedFilterTest extends BaseTest {
+public class CompletedFilterTest {
 
     private TaskManagerPage page = new TaskManagerPage();
 
