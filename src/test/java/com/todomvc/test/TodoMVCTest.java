@@ -44,7 +44,7 @@ public class TodoMVCTest {
     @Test
     public void testEditAtAll() {
 
-        //given
+        given();
         page.create("a");
 
         page.startEdit("a", "a edited").pressEnter();
@@ -55,7 +55,7 @@ public class TodoMVCTest {
     @Test
     public void testCancelEditByEscAtActive() {
 
-        //given
+        given();
         page.create("b");
         filterActive();
 
@@ -68,7 +68,7 @@ public class TodoMVCTest {
     @Test
     public void testActivateAllAtCompleted() {
 
-        //given - completed task
+        given();
         page.create("a", "b", "c", "d");
         page.toggleAll();
         filterCompleted();
