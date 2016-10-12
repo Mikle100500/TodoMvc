@@ -17,8 +17,7 @@ public class CompletedFilterTest extends BaseTest {
     @Test
     public void testCreate(){
 
-        given(build(ACTIVE, "a"), null);
-        page.filterCompleted();
+        given(build(ACTIVE, "a"), "Completed");
 
         page.create("b");
         page.assertItemsLeft(2);
@@ -28,8 +27,7 @@ public class CompletedFilterTest extends BaseTest {
     @Test
     public void testEdit(){
 
-        given(build(COMPLETED, "a"), null);
-        page.filterCompleted();
+        given(build(COMPLETED, "a"), "Completed");
 
         page.startEdit("a", "a edited").pressEnter();
         page.assertVisibleTasks("a edited");
@@ -38,8 +36,7 @@ public class CompletedFilterTest extends BaseTest {
     @Test
     public void testDelete(){
 
-        given(build(COMPLETED, "a", "b", "c"), null);
-        page.filterCompleted();
+        given(build(COMPLETED, "a", "b", "c"), "Completed");
 
         page.delete("a");
         page.assertVisibleTasks("b", "c");
@@ -48,8 +45,7 @@ public class CompletedFilterTest extends BaseTest {
     @Test
     public void testCompleteAll(){
 
-        given(build(ACTIVE, "a", "b", "c"), null);
-        page.filterCompleted();
+        given(build(ACTIVE, "a", "b", "c"), "Completed");
 
         page.toggleAll();
         page.assertVisibleTasks("a", "b", "c");
@@ -58,8 +54,7 @@ public class CompletedFilterTest extends BaseTest {
     @Test
     public void testCancelEditWithEsc(){
 
-        given(build(COMPLETED, "a"), null);
-        page.filterCompleted();
+        given(build(COMPLETED, "a"), "Completed");
 
         page.startEdit("a", "a edited").pressEscape();
         page.assertVisibleTasks("a");
@@ -68,8 +63,7 @@ public class CompletedFilterTest extends BaseTest {
     @Test
     public void testEditWithTab(){
 
-        given(build(COMPLETED, "a"), null);
-        page.filterCompleted();
+        given(build(COMPLETED, "a"), "Completed");
 
         page.startEdit("a", "a edited").pressTab();
         page.assertVisibleTasks("a edited");
@@ -78,8 +72,7 @@ public class CompletedFilterTest extends BaseTest {
     @Test
     public void testEditWithClick(){
 
-        given(build(COMPLETED, "a"), null);
-        page.filterCompleted();
+        given(build(COMPLETED, "a"), "Completed");
 
         page.startEdit("a", "a edited");
         $("#header").click();
@@ -90,8 +83,7 @@ public class CompletedFilterTest extends BaseTest {
     @Test
     public void testDeleteWithEmptying(){
 
-        given(build(COMPLETED, "a"), null);
-        page.filterCompleted();
+        given(build(COMPLETED, "a"), "Completed");
 
         page.startEdit("a", "").pressEnter();
         page.assertNoVisibleTasks();

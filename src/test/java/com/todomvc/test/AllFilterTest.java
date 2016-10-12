@@ -9,6 +9,7 @@ import static com.todomvc.helpers.GivenHelpers.given;
 import static com.todomvc.helpers.GivenHelpers.Task.build;
 import static com.todomvc.helpers.TaskStatus.ACTIVE;
 import static com.todomvc.helpers.TaskStatus.COMPLETED;
+import static com.todomvc.pages.TaskManagerPage.filterActive;
 
 
 public class AllFilterTest extends BaseTest {
@@ -18,12 +19,12 @@ public class AllFilterTest extends BaseTest {
     @Test
     public void testActivate(){
 
-        given(build(ACTIVE, "a", "b", "c"), null);
+        given(build(ACTIVE, "a", "b", "c"), "All");
 
         page.toggle("b");
         page.assertItemsLeft(2);
 
-        page.filterActive();
+        filterActive();
         page.assertVisibleTasks("a", "c");
     }
 
@@ -31,7 +32,7 @@ public class AllFilterTest extends BaseTest {
     @Test
     public void testCompleteAll(){
 
-        given(build(ACTIVE, "a", "b", "c"), null);
+        given(build(ACTIVE, "a", "b", "c"), "All");
 
         page.toggleAll();
         page.assertItemsLeft(0);
@@ -41,7 +42,7 @@ public class AllFilterTest extends BaseTest {
     @Test
     public void testClearCompleted(){
 
-        given(build(COMPLETED, "a", "b", "c"), null);
+        given(build(COMPLETED, "a", "b", "c"), "All");
 
         page.clearCompleted();
         page.assertNoVisibleTasks();
@@ -50,7 +51,7 @@ public class AllFilterTest extends BaseTest {
     @Test
     public void testActivateAll(){
 
-        given(build(COMPLETED, "a", "b", "c"), null);
+        given(build(COMPLETED, "a", "b", "c"), "All");
 
         page.toggleAll();
         page.assertVisibleTasks("a", "b", "c");
@@ -59,7 +60,7 @@ public class AllFilterTest extends BaseTest {
     @Test
     public void testCancelEditWithEsc(){
 
-        given(build(ACTIVE, "a"), null);
+        given(build(ACTIVE, "a"), "All");
 
         page.startEdit("a", "a edited").pressEscape();
         page.assertVisibleTasks("a");
@@ -68,7 +69,7 @@ public class AllFilterTest extends BaseTest {
     @Test
     public void testEditWithTab(){
 
-        given(build(ACTIVE, "a"), null);
+        given(build(ACTIVE, "a"), "All");
 
         page.startEdit("a", "a edited").pressTab();
         page.assertVisibleTasks("a edited");
@@ -77,7 +78,7 @@ public class AllFilterTest extends BaseTest {
     @Test
     public void testEditWithClick(){
 
-        given(build(ACTIVE, "a"), null);
+        given(build(ACTIVE, "a"), "All");
 
         page.startEdit("a", "a edited");
         $("#header").click();
@@ -88,7 +89,7 @@ public class AllFilterTest extends BaseTest {
     @Test
     public void testDeleteWithEmptying(){
 
-        given(build(ACTIVE, "a"), null);
+        given(build(ACTIVE, "a"), "All");
 
         page.startEdit("a", "").pressEnter();
         page.assertNoVisibleTasks();

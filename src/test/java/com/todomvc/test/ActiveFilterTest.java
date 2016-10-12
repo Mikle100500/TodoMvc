@@ -17,8 +17,7 @@ public class ActiveFilterTest extends BaseTest {
     @Test
     public void testEdit(){
 
-        given(build(ACTIVE, "a"), null);
-        page.filterActive();
+        given(build(ACTIVE, "a"), "Active");
 
         page.startEdit("a", "a edited").pressEnter();
         page.assertVisibleTasks("a edited");
@@ -27,8 +26,7 @@ public class ActiveFilterTest extends BaseTest {
     @Test
     public void testDelete(){
 
-        given(build(ACTIVE, "a", "b"), null);
-        page.filterActive();
+        given(build(ACTIVE, "a", "b"), "Active");
 
         page.delete("a");
         page.assertVisibleTasks("b");
@@ -38,8 +36,7 @@ public class ActiveFilterTest extends BaseTest {
     @Test
     public void testComplete(){
 
-        given(build(ACTIVE, "a", "b"), null);
-        page.filterActive();
+        given(build(ACTIVE, "a", "b"), "Active");
 
         page.toggle("a");
         page.assertVisibleTasks("b");
@@ -50,8 +47,7 @@ public class ActiveFilterTest extends BaseTest {
     @Test
     public void testActivateAll(){
 
-        given(build(ACTIVE, "a", "b", "c", "d"), null);
-        page.filterActive();
+        given(build(ACTIVE, "a", "b", "c", "d"), "Active");
 
         page.toggleAll();
         page.assertNoVisibleTasks();
@@ -62,8 +58,7 @@ public class ActiveFilterTest extends BaseTest {
     @Test
     public void testClearCompleted(){
 
-        given(build(COMPLETED, "a", "b", "c", "d"), null);
-        page.filterActive();
+        given(build(COMPLETED, "a", "b", "c", "d"), "Active");
 
         page.clearCompleted();
         page.assertNoVisibleTasks();
@@ -73,8 +68,7 @@ public class ActiveFilterTest extends BaseTest {
     @Test
     public void testEditWithTab(){
 
-        given(build(ACTIVE, "a"), null);
-        page.filterActive();
+        given(build(ACTIVE, "a"), "Active");
 
         page.startEdit("a", "a edited").pressTab();
         page.assertVisibleTasks("a edited");
@@ -83,8 +77,7 @@ public class ActiveFilterTest extends BaseTest {
     @Test
     public void testEditWithClick(){
 
-        given(build(ACTIVE, "a"), null);
-        page.filterActive();
+        given(build(ACTIVE, "a"), "Active");
 
         page.startEdit("a", "a edited");
         $("#header").click();
@@ -95,8 +88,7 @@ public class ActiveFilterTest extends BaseTest {
     @Test
     public void testDeleteWithEmptying(){
 
-        given(build(ACTIVE, "a"), null);
-        page.filterActive();
+        given(build(ACTIVE, "a"), "Active");
 
         page.startEdit("a", "").pressEnter();
         page.assertNoVisibleTasks();
