@@ -8,6 +8,7 @@ import static com.todomvc.helpers.GivenHelpers.Task.build;
 import static com.todomvc.helpers.GivenHelpers.given;
 import static com.todomvc.helpers.TaskStatus.ACTIVE;
 import static com.todomvc.helpers.TaskStatus.COMPLETED;
+import static com.todomvc.pages.TaskManagerPage.filterCompleted;
 
 public class ActiveFilterTest {
 
@@ -62,6 +63,14 @@ public class ActiveFilterTest {
         page.clearCompleted();
         page.assertNoVisibleTasks();
 
+    }
+
+    @Test
+    public void testNavigateToCompleted(){
+
+        given(build(COMPLETED, "a", "b", "c", "d"), "Active");
+        filterCompleted();
+        page.assertVisibleTasks("a", "b", "c", "d");
     }
 
     @Test
