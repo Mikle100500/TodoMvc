@@ -1,4 +1,4 @@
-package com.todomvc.test;
+package com.todomvc.testconfigs;
 
 
 import com.codeborne.selenide.Screenshots;

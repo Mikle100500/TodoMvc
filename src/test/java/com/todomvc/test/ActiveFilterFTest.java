@@ -1,18 +1,23 @@
 package com.todomvc.test;
 
+import com.todomvc.pages.TaskManagerPage;
+import com.todomvc.testconfigs.BaseTest;
 import org.junit.Test;
 
 import static com.codeborne.selenide.Selenide.$;
-import static com.todomvc.helpers.TaskBuilder.build;
+import static com.todomvc.helpers.GivenHelpers.given;
+import static com.todomvc.helpers.Task.build;
 import static com.todomvc.helpers.TaskStatus.ACTIVE;
 import static com.todomvc.helpers.TaskStatus.COMPLETED;
 
 public class ActiveFilterFTest extends BaseTest {
 
+    private TaskManagerPage page = new TaskManagerPage();
+
     @Test
     public void testEdit(){
 
-        page.given(build("a", ACTIVE));
+        given(build(ACTIVE, "a"));
         page.filterActive();
 
         page.startEdit("a", "a edited").pressEnter();
@@ -22,7 +27,7 @@ public class ActiveFilterFTest extends BaseTest {
     @Test
     public void testDelete(){
 
-        page.given(build(ACTIVE, "a", "b"));
+        given(build(ACTIVE, "a", "b"));
         page.filterActive();
 
         page.delete("a");
@@ -33,7 +38,7 @@ public class ActiveFilterFTest extends BaseTest {
     @Test
     public void testComplete(){
 
-        page.given(build(ACTIVE, "a", "b"));
+        given(build(ACTIVE, "a", "b"));
         page.filterActive();
 
         page.toggle("a");
@@ -45,7 +50,7 @@ public class ActiveFilterFTest extends BaseTest {
     @Test
     public void testActivateAll(){
 
-        page.given(build(ACTIVE, "a", "b", "c", "d"));
+        given(build(ACTIVE, "a", "b", "c", "d"));
         page.filterActive();
 
         page.toggleAll();
@@ -57,7 +62,7 @@ public class ActiveFilterFTest extends BaseTest {
     @Test
     public void testClearCompleted(){
 
-        page.given(build(COMPLETED, "a", "b", "c", "d"));
+        given(build(COMPLETED, "a", "b", "c", "d"));
         page.filterActive();
 
         page.clearCompleted();
@@ -68,7 +73,7 @@ public class ActiveFilterFTest extends BaseTest {
     @Test
     public void testEditWithTab(){
 
-        page.given(build(ACTIVE, "a"));
+        given(build(ACTIVE, "a"));
         page.filterActive();
 
         page.startEdit("a", "a edited").pressTab();
@@ -78,7 +83,7 @@ public class ActiveFilterFTest extends BaseTest {
     @Test
     public void testEditWithClick(){
 
-        page.given(build(ACTIVE, "a"));
+        given(build(ACTIVE, "a"));
         page.filterActive();
 
         page.startEdit("a", "a edited");
@@ -90,7 +95,7 @@ public class ActiveFilterFTest extends BaseTest {
     @Test
     public void testDeleteWithEmptying(){
 
-        page.given(build(ACTIVE, "a"));
+        given(build(ACTIVE, "a"));
         page.filterActive();
 
         page.startEdit("a", "").pressEnter();

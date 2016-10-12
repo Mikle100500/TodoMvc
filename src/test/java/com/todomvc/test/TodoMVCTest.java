@@ -1,9 +1,13 @@
 package com.todomvc.test;
 
+import com.todomvc.pages.TaskManagerPage;
+import com.todomvc.testconfigs.BaseTest;
 import org.junit.Test;
 
 
 public class TodoMVCTest extends BaseTest {
+
+    private TaskManagerPage page = new TaskManagerPage();
 
     @Test
     public void testTasksCommonFlow() {

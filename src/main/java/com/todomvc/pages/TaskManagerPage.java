@@ -4,8 +4,10 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 
 import java.lang.String;
+import java.util.List;
 
-import com.todomvc.helpers.Helpers;
+import com.todomvc.helpers.GivenHelpers;
+import com.todomvc.helpers.Task;
 import org.openqa.selenium.By;
 import ru.yandex.qatools.allure.annotations.Step;
 
@@ -16,7 +18,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
 
-public class TaskManagerPage extends Helpers{
+public class TaskManagerPage {
 
     private ElementsCollection tasks = $$("#todo-list>li");
 
@@ -86,4 +88,6 @@ public class TaskManagerPage extends Helpers{
     public void filterCompleted() {
         $(By.linkText("Completed")).click();
     }
+
+
 }

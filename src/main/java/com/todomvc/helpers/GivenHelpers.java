@@ -4,27 +4,14 @@ import com.codeborne.selenide.Selenide;
 
 import java.util.List;
 
-public class Helpers {
+public class GivenHelpers {
 
-    public void given(TaskBuilder task) {
-
-        String queryToExecute = "localStorage.setItem('todos-troopjs','["
-                + "{\"completed\":"
-                + task.getStatus()
-                + ",\"title\":\""
-                + task.getName()
-                + "\"}]')";
-
-        Selenide.executeJavaScript(queryToExecute);
-        Selenide.refresh();
-    }
-
-    public void given(List<TaskBuilder> tasks) {
+    public static void given(List<Task> tasks) {
 
         String queryToExecute = "localStorage.setItem('todos-troopjs','[";
         String queryBuilder = "";
 
-        for (TaskBuilder task : tasks) {
+        for (Task task : tasks) {
             queryBuilder += "{\"completed\":"
                     + task.getStatus()
                     + ",\"title\":\""
@@ -34,6 +21,7 @@ public class Helpers {
 
         queryToExecute = queryToExecute + queryBuilder.substring(0, queryBuilder.length() - 1) + "]')";
 
+        Selenide.executeJavaScript("localStorage.clear()");
         Selenide.executeJavaScript(queryToExecute);
         Selenide.refresh();
     }
