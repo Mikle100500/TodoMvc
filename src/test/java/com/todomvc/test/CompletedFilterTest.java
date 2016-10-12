@@ -6,18 +6,18 @@ import org.junit.Test;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.todomvc.helpers.GivenHelpers.given;
-import static com.todomvc.helpers.Task.build;
+import static com.todomvc.helpers.GivenHelpers.Task.build;
 import static com.todomvc.helpers.TaskStatus.ACTIVE;
 import static com.todomvc.helpers.TaskStatus.COMPLETED;
 
-public class CompletedFilterFTest extends BaseTest {
+public class CompletedFilterTest extends BaseTest {
 
     private TaskManagerPage page = new TaskManagerPage();
 
     @Test
     public void testCreate(){
 
-        given(build(ACTIVE, "a"));
+        given(build(ACTIVE, "a"), null);
         page.filterCompleted();
 
         page.create("b");
@@ -28,7 +28,7 @@ public class CompletedFilterFTest extends BaseTest {
     @Test
     public void testEdit(){
 
-        given(build(COMPLETED, "a"));
+        given(build(COMPLETED, "a"), null);
         page.filterCompleted();
 
         page.startEdit("a", "a edited").pressEnter();
@@ -38,7 +38,7 @@ public class CompletedFilterFTest extends BaseTest {
     @Test
     public void testDelete(){
 
-        given(build(COMPLETED, "a", "b", "c"));
+        given(build(COMPLETED, "a", "b", "c"), null);
         page.filterCompleted();
 
         page.delete("a");
@@ -48,7 +48,7 @@ public class CompletedFilterFTest extends BaseTest {
     @Test
     public void testCompleteAll(){
 
-        given(build(ACTIVE, "a", "b", "c"));
+        given(build(ACTIVE, "a", "b", "c"), null);
         page.filterCompleted();
 
         page.toggleAll();
@@ -58,7 +58,7 @@ public class CompletedFilterFTest extends BaseTest {
     @Test
     public void testCancelEditWithEsc(){
 
-        given(build(COMPLETED, "a"));
+        given(build(COMPLETED, "a"), null);
         page.filterCompleted();
 
         page.startEdit("a", "a edited").pressEscape();
@@ -68,7 +68,7 @@ public class CompletedFilterFTest extends BaseTest {
     @Test
     public void testEditWithTab(){
 
-        given(build(COMPLETED, "a"));
+        given(build(COMPLETED, "a"), null);
         page.filterCompleted();
 
         page.startEdit("a", "a edited").pressTab();
@@ -78,7 +78,7 @@ public class CompletedFilterFTest extends BaseTest {
     @Test
     public void testEditWithClick(){
 
-        given(build(COMPLETED, "a"));
+        given(build(COMPLETED, "a"), null);
         page.filterCompleted();
 
         page.startEdit("a", "a edited");
@@ -90,7 +90,7 @@ public class CompletedFilterFTest extends BaseTest {
     @Test
     public void testDeleteWithEmptying(){
 
-        given(build(COMPLETED, "a"));
+        given(build(COMPLETED, "a"), null);
         page.filterCompleted();
 
         page.startEdit("a", "").pressEnter();
