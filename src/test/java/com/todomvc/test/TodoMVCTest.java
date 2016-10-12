@@ -4,6 +4,10 @@ import com.todomvc.pages.TaskManagerPage;
 import com.todomvc.testconfigs.BaseTest;
 import org.junit.Test;
 
+import static com.todomvc.pages.TaskManagerPage.filterActive;
+import static com.todomvc.pages.TaskManagerPage.filterAll;
+import static com.todomvc.pages.TaskManagerPage.filterCompleted;
+
 
 public class TodoMVCTest extends BaseTest {
 
@@ -15,14 +19,14 @@ public class TodoMVCTest extends BaseTest {
         page.create("a");
         page.assertTasks("a");
 
-        page.filterActive();
+        filterActive();
         page.assertVisibleTasks("a");
 
         page.create("b");
         page.toggleAll();
         page.assertNoVisibleTasks();
 
-        page.filterCompleted();
+        filterCompleted();
         page.assertVisibleTasks("a", "b");
 
         page.toggle("b");
@@ -31,7 +35,7 @@ public class TodoMVCTest extends BaseTest {
         page.clearCompleted();
         page.assertNoVisibleTasks();
 
-        page.filterAll();
+        filterAll();
         page.delete("b");
         page.assertNoVisibleTasks();
     }
@@ -53,7 +57,7 @@ public class TodoMVCTest extends BaseTest {
 
         //given
         page.create("b");
-        page.filterActive();
+        filterActive();
 
         page.startEdit("b", "b cancel edit").pressEscape();
         page.assertVisibleTasks("b");
@@ -67,7 +71,7 @@ public class TodoMVCTest extends BaseTest {
         //given - completed task
         page.create("a", "b", "c", "d");
         page.toggleAll();
-        page.filterCompleted();
+        filterCompleted();
 
         page.toggleAll();
         page.assertNoVisibleTasks();
