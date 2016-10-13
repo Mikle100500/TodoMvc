@@ -4,10 +4,10 @@ import com.todomvc.pages.TaskManagerPage;
 import org.junit.Test;
 
 import static com.codeborne.selenide.Selenide.$;
-import static com.todomvc.helpers.GivenHelpers.Task.build;
+import static com.todomvc.helpers.GivenHelpers.build;
 import static com.todomvc.helpers.GivenHelpers.given;
-import static com.todomvc.helpers.TaskStatus.ACTIVE;
-import static com.todomvc.helpers.TaskStatus.COMPLETED;
+import static com.todomvc.helpers.GivenHelpers.TaskStatus.ACTIVE;
+import static com.todomvc.helpers.GivenHelpers.TaskStatus.COMPLETED;
 import static com.todomvc.pages.TaskManagerPage.filterCompleted;
 
 public class ActiveFilterTest {
@@ -101,4 +101,5 @@ public class ActiveFilterTest {
         page.startEdit("a", "").pressEnter();
         page.assertNoVisibleTasks();
     }
+
 }

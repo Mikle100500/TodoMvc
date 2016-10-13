@@ -58,6 +58,17 @@ public class GivenHelpers {
 
     }
 
+    public static List<Task> build(TaskStatus taskStatus, String... taskNames) {
+
+        List<Task> tasks = new ArrayList<Task>();
+
+        for (String task : taskNames) {
+            tasks.add(new Task(taskStatus, task));
+        }
+
+        return tasks;
+    }
+
     public static class Task {
 
         private String name;
@@ -69,15 +80,22 @@ public class GivenHelpers {
             this.status = status;
         }
 
-        public static List<Task> build(TaskStatus taskStatus, String... taskNames) {
+    }
 
-            List<Task> tasks = new ArrayList<Task>();
+    public enum TaskStatus{
 
-            for (String task : taskNames) {
-                tasks.add(new Task(taskStatus, task));
-            }
+        ACTIVE("false"),
+        COMPLETED("true");
 
-            return tasks;
+        private final String status;
+
+        TaskStatus(String status){
+            this.status = status;
+        }
+
+        @Override
+        public String toString(){
+            return status;
         }
     }
 }
