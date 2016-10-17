@@ -5,6 +5,10 @@ package com.todomvc.builder;
 //given()......build() - можно разные делать - в зависимости от потребностей
 
 import com.codeborne.selenide.Selenide;
+import com.google.common.collect.Lists;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
@@ -12,19 +16,19 @@ import static com.codeborne.selenide.WebDriverRunner.url;
 
 public class Task {
 
-    private String name;
+    private final String[] activeTasks;
+    private final String[] completedTasks;
 
     private Task(TaskBuilder builder){
-        this.name = builder.name;
+
+        this.activeTasks = builder.activeTasks;
+        this.completedTasks = builder.completedTasks;
     }
 
     public static class TaskBuilder {
 
-        private String name;
-
-        public TaskBuilder(String name){
-            this.name = name;
-        }
+        private String[] activeTasks;
+        private String[] completedTasks;
 
         public void given(){
 
@@ -36,29 +40,35 @@ public class Task {
             Selenide.refresh();
         }
 
-        public void activeTasks(String... taskNames){
-            // TODO: 13/10/2016
+        public TaskBuilder activeTasks(String... activeTasks){
+
+            this.activeTasks = activeTasks;
+            return this;
         }
 
-        public void completedTasks(String... taskNames){
-            // TODO: 13/10/2016
+        public TaskBuilder completedTasks(String... completedTasks){
+
+            this.completedTasks = completedTasks;
+            return this;
         }
 
-        public void atAllFilter(){
+
+        public final void atAllFilter(){
             $("https://todomvc4tasj.herokuapp.com/#/");
         }
 
-        public void atActiveFilter(){
+        public final void atActiveFilter(){
             $("https://todomvc4tasj.herokuapp.com/#/active");
         }
 
-        public void atCompletedFilter(){
+        public final void atCompletedFilter(){
             $("https://todomvc4tasj.herokuapp.com/#/completed");
         }
 
 
         public Task build(){
-            return new TaskBuilder(this);
+            given();
+            return new Task(this);
         }
     }
 
