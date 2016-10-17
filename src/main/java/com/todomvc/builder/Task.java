@@ -5,10 +5,6 @@ package com.todomvc.builder;
 //given()......build() - можно разные делать - в зависимости от потребностей
 
 import com.codeborne.selenide.Selenide;
-import com.google.common.collect.Lists;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
@@ -30,7 +26,7 @@ public class Task {
         private String[] activeTasks;
         private String[] completedTasks;
 
-        public void given(){
+        public static void given(){
 
             if (!url().equals("https://todomvc4tasj.herokuapp.com/")) {
                 open("https://todomvc4tasj.herokuapp.com/");
@@ -39,6 +35,7 @@ public class Task {
             Selenide.executeJavaScript("localStorage.clear()");
             Selenide.refresh();
         }
+
 
         public TaskBuilder activeTasks(String... activeTasks){
 
@@ -51,6 +48,8 @@ public class Task {
             this.completedTasks = completedTasks;
             return this;
         }
+
+
 
 
         public final void atAllFilter(){
@@ -67,7 +66,6 @@ public class Task {
 
 
         public Task build(){
-            given();
             return new Task(this);
         }
     }
