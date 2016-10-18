@@ -13,7 +13,7 @@ public class TaskTest {
     @Test
     public void testAll() {
 
-        given().activeTasks("a", "b").atAllFilter().build();
+        given().activeTasksRedo("a", "b").atAllFilter().build();
         page.assertVisibleTasks("a", "b");
 
     }
@@ -21,7 +21,7 @@ public class TaskTest {
     @Test
     public void testActive() {
 
-        given().activeTasks("c", "d").atActiveFilter().build();
+        given().activeTasksRedo("c", "d").atActiveFilter().build();
         page.assertVisibleTasks("c", "d");
 
     }
@@ -29,7 +29,7 @@ public class TaskTest {
     @Test
     public void testCompleted() {
 
-        given().completedTasks("g", "h").atCompletedFilter().build();
+        given().completedTasksRedo("g", "h").atCompletedFilter().build();
         page.assertVisibleTasks("g", "h");
 
     }

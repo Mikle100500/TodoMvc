@@ -1,7 +1,7 @@
 package com.todomvc.builder;
 
 //given().build() - ни одной таски
-//given().activeTasks("a","b","c").completedTasks("d", "e").atAllFilter().build() - разные таски на таком-то фильтре
+//given().activeTasksRedo("a","b","c").completedTasksRedo("d", "e").atAllFilter().build() - разные таски на таком-то фильтре
 //given()......build()
 
 import java.util.ArrayList;
@@ -43,7 +43,23 @@ public class Task {
             completedTasks = new ArrayList<String>();
         }
 
-        public TaskBuilder activeTasks(String... activeTasks){
+        public TaskBuilder addActive(String... tasks){
+
+            for (String task : tasks) {
+                this.activeTasks.add(task);
+            }
+            return this;
+        }
+
+        public TaskBuilder addCompleted(String... tasks){
+
+            for (String task : tasks) {
+                this.completedTasks.add(task);
+            }
+            return this;
+        }
+
+        public TaskBuilder activeTasksRedo(String... activeTasks){
 
             String queryToExecute = "localStorage.setItem('todos-troopjs','[";
             String queryBuilder = "";
@@ -61,12 +77,12 @@ public class Task {
             return this;
         }
 
-        public TaskBuilder completedTasks(String... completedTasks){
+        public TaskBuilder completedTasksRedo(String... completedTasks){
 
             String queryToExecute = "localStorage.setItem('todos-troopjs','[";
             String queryBuilder = "";
 
-            for (String task : completedTasks) {
+            for (String task : this.completedTasks) {
                 queryBuilder += "{\"completed\":true,\"title\":\""
                         + task
                         + "\"},";
