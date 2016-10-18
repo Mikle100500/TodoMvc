@@ -13,24 +13,24 @@ public class TaskTest {
     @Test
     public void testAll() {
 
-        given().activeTasksRedo("a", "b").atAllFilter().build();
-        page.assertVisibleTasks("a", "b");
-
+        given().activeTasks("a", "b").completedTasks("c", "d").atCompletedFilter().build();
+        page.assertVisibleTasks("a", "b", "c", "d");
+        page.assertItemsLeft(2);
     }
-
-    @Test
-    public void testActive() {
-
-        given().activeTasksRedo("c", "d").atActiveFilter().build();
-        page.assertVisibleTasks("c", "d");
-
-    }
-
-    @Test
-    public void testCompleted() {
-
-        given().completedTasksRedo("g", "h").atCompletedFilter().build();
-        page.assertVisibleTasks("g", "h");
-
-    }
+//
+//    @Test
+//    public void testActive() {
+//
+//        given().activeTasksRedo("c", "d").atActiveFilter().build();
+//        page.assertVisibleTasks("c", "d");
+//
+//    }
+//
+//    @Test
+//    public void testCompleted() {
+//
+//        given().completedTasksRedo("g", "h").atCompletedFilter().build();
+//        page.assertVisibleTasks("g", "h");
+//
+//    }
 }
