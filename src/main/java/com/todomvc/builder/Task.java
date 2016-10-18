@@ -4,13 +4,10 @@ package com.todomvc.builder;
 //given().activeTasks("a","b","c").completedTasks("d", "e").atAllFilter().build() - разные таски на таком-то фильтре
 //given()......build()
 
-import com.codeborne.selenide.Selenide;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverRunner.url;
 
 public class Task {
@@ -30,7 +27,7 @@ public class Task {
             open("https://todomvc4tasj.herokuapp.com/");
         }
 
-        Selenide.executeJavaScript("localStorage.clear()");
+        executeJavaScript("localStorage.clear()");
 
         return new TaskBuilder();
     }
@@ -59,8 +56,8 @@ public class Task {
 
             queryToExecute = queryToExecute + queryBuilder.substring(0, queryBuilder.length() - 1) + "]')";
 
-            Selenide.executeJavaScript(queryToExecute);
-            Selenide.refresh();
+            executeJavaScript(queryToExecute);
+            refresh();
             return this;
         }
 
@@ -77,8 +74,8 @@ public class Task {
 
             queryToExecute = queryToExecute + queryBuilder.substring(0, queryBuilder.length() - 1) + "]')";
 
-            Selenide.executeJavaScript(queryToExecute);
-            Selenide.refresh();
+            executeJavaScript(queryToExecute);
+            refresh();
             return this;
         }
 
