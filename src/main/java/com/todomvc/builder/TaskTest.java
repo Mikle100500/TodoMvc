@@ -2,15 +2,16 @@ package com.todomvc.builder;
 
 import org.junit.Test;
 
+import static com.codeborne.selenide.Selenide.sleep;
+import static com.todomvc.builder.Task.given;
+
 
 public class TaskTest {
 
     @Test
     public void testSetUp(){
-        new Task.TaskBuilder()
-                .activeTasks("a", "b")
-                .completedTasks("c", "d")
-                .atActiveFilter()
-                .build();
+
+        given().addActive("a", "b").addCompleted("c", "d").atAllFilter().build();
+        sleep(5000);
     }
 }

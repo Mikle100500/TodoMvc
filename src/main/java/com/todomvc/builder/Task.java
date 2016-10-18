@@ -2,18 +2,20 @@ package com.todomvc.builder;
 
 //given().build() - ни одной таски
 //given().activeTasks("a","b","c").completedTasks("d", "e").atAllFilter().build() - разные таски на таком-то фильтре
-//given()......build() - можно разные делать - в зависимости от потребностей
+//given()......build()
 
 import com.codeborne.selenide.Selenide;
 
-import static com.codeborne.selenide.Selenide.$;
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.url;
 
 public class Task {
 
-    private final String[] activeTasks;
-    private final String[] completedTasks;
+    private List<String> activeTasks;
+    private List<String> completedTasks;
 
     private Task(TaskBuilder builder){
 
@@ -21,53 +23,92 @@ public class Task {
         this.completedTasks = builder.completedTasks;
     }
 
+    public static TaskBuilder given(){
+
+        if (!url().equals("https://todomvc4tasj.herokuapp.com/")) {
+            open("https://todomvc4tasj.herokuapp.com/");
+        }
+
+        Selenide.executeJavaScript("localStorage.clear()");
+
+        return new TaskBuilder();
+    }
+
     public static class TaskBuilder {
 
-        private String[] activeTasks;
-        private String[] completedTasks;
+        private List<String> activeTasks;
+        private List<String> completedTasks;
 
-        public static void given(){
+        public TaskBuilder(){
 
-            if (!url().equals("https://todomvc4tasj.herokuapp.com/")) {
-                open("https://todomvc4tasj.herokuapp.com/");
+            activeTasks = new ArrayList<String>();
+            completedTasks = new ArrayList<String>();
+        }
+
+        public TaskBuilder addActive(String... tasks){
+
+            String queryToExecute = "localStorage.setItem('todos-troopjs','[";
+            String queryBuilder = "";
+
+            for (String task : tasks) {
+                queryBuilder += "{\"completed\": false,\"title\":\""
+                        + task
+                        + "\"},";
             }
 
-            Selenide.executeJavaScript("localStorage.clear()");
+            queryToExecute = queryToExecute + queryBuilder.substring(0, queryBuilder.length() - 1) + "]')";
+
+            Selenide.executeJavaScript(queryToExecute);
             Selenide.refresh();
-        }
 
-
-        public TaskBuilder activeTasks(String... activeTasks){
-
-            this.activeTasks = activeTasks;
             return this;
         }
 
-        public TaskBuilder completedTasks(String... completedTasks){
+        public TaskBuilder addCompleted(String... tasks){
 
-            this.completedTasks = completedTasks;
+            String queryToExecute = "localStorage.setItem('todos-troopjs','[";
+            String queryBuilder = "";
+
+            for (String task : tasks) {
+                queryBuilder += "{\"completed\": true,\"title\":\""
+                        + task
+                        + "\"},";
+            }
+
+            queryToExecute = queryToExecute + queryBuilder.substring(0, queryBuilder.length() - 1) + "]')";
+
+            Selenide.executeJavaScript(queryToExecute);
+
+
             return this;
         }
 
+        public TaskBuilder atAllFilter(){
 
-
-
-        public final void atAllFilter(){
-            $("https://todomvc4tasj.herokuapp.com/#/");
+            open("https://todomvc4tasj.herokuapp.com/#");
+            return this;
         }
 
-        public final void atActiveFilter(){
-            $("https://todomvc4tasj.herokuapp.com/#/active");
+        public TaskBuilder atActiveFilter(){
+
+            open("https://todomvc4tasj.herokuapp.com/#/active");
+
+            Selenide.refresh();
+            return this;
         }
 
-        public final void atCompletedFilter(){
-            $("https://todomvc4tasj.herokuapp.com/#/completed");
-        }
+        public TaskBuilder atCompletedFilter(){
 
+            open("https://todomvc4tasj.herokuapp.com/#/completed");
+
+            Selenide.refresh();
+            return this;
+        }
 
         public Task build(){
             return new Task(this);
         }
+
     }
 
 }
