@@ -43,12 +43,12 @@ public class Task {
             completedTasks = new ArrayList<String>();
         }
 
-        public TaskBuilder activeTasks(String... tasks){
+        public TaskBuilder activeTasks(String... activeTasks){
 
             String queryToExecute = "localStorage.setItem('todos-troopjs','[";
             String queryBuilder = "";
 
-            for (String task : tasks) {
+            for (String task : activeTasks) {
                 queryBuilder += "{\"completed\":false,\"title\":\""
                         + task
                         + "\"},";
@@ -61,12 +61,12 @@ public class Task {
             return this;
         }
 
-        public TaskBuilder completedTasks(String... tasks){
+        public TaskBuilder completedTasks(String... completedTasks){
 
             String queryToExecute = "localStorage.setItem('todos-troopjs','[";
             String queryBuilder = "";
 
-            for (String task : tasks) {
+            for (String task : completedTasks) {
                 queryBuilder += "{\"completed\":true,\"title\":\""
                         + task
                         + "\"},";
