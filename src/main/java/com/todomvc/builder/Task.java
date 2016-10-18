@@ -12,8 +12,8 @@ import static com.codeborne.selenide.WebDriverRunner.url;
 
 public class Task {
 
-    private List<String> activeTasks;
-    private List<String> completedTasks;
+    private final List<String> activeTasks;
+    private final List<String> completedTasks;
 
     private Task(TaskBuilder builder){
 
