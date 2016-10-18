@@ -9,6 +9,7 @@ import com.codeborne.selenide.Selenide;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.url;
 
@@ -45,13 +46,13 @@ public class Task {
             completedTasks = new ArrayList<String>();
         }
 
-        public TaskBuilder addActive(String... tasks){
+        public TaskBuilder activeTasks(String... tasks){
 
             String queryToExecute = "localStorage.setItem('todos-troopjs','[";
             String queryBuilder = "";
 
             for (String task : tasks) {
-                queryBuilder += "{\"completed\": false,\"title\":\""
+                queryBuilder += "{\"completed\":false,\"title\":\""
                         + task
                         + "\"},";
             }
@@ -59,18 +60,18 @@ public class Task {
             queryToExecute = queryToExecute + queryBuilder.substring(0, queryBuilder.length() - 1) + "]')";
 
             Selenide.executeJavaScript(queryToExecute);
+            System.out.println("Active query: " + queryToExecute);
             Selenide.refresh();
-
             return this;
         }
 
-        public TaskBuilder addCompleted(String... tasks){
+        public TaskBuilder completedTasks(String... tasks){
 
             String queryToExecute = "localStorage.setItem('todos-troopjs','[";
             String queryBuilder = "";
 
             for (String task : tasks) {
-                queryBuilder += "{\"completed\": true,\"title\":\""
+                queryBuilder += "{\"completed\":true,\"title\":\""
                         + task
                         + "\"},";
             }
@@ -78,14 +79,15 @@ public class Task {
             queryToExecute = queryToExecute + queryBuilder.substring(0, queryBuilder.length() - 1) + "]')";
 
             Selenide.executeJavaScript(queryToExecute);
-
-
+            System.out.println("Completed query: " + queryToExecute);
+            Selenide.refresh();
             return this;
         }
 
         public TaskBuilder atAllFilter(){
 
-            open("https://todomvc4tasj.herokuapp.com/#");
+            $("https://todomvc4tasj.herokuapp.com/#");
+
             return this;
         }
 
@@ -93,7 +95,6 @@ public class Task {
 
             open("https://todomvc4tasj.herokuapp.com/#/active");
 
-            Selenide.refresh();
             return this;
         }
 
@@ -101,11 +102,11 @@ public class Task {
 
             open("https://todomvc4tasj.herokuapp.com/#/completed");
 
-            Selenide.refresh();
             return this;
         }
 
         public Task build(){
+
             return new Task(this);
         }
 
