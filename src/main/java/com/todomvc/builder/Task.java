@@ -60,7 +60,6 @@ public class Task {
             queryToExecute = queryToExecute + queryBuilder.substring(0, queryBuilder.length() - 1) + "]')";
 
             Selenide.executeJavaScript(queryToExecute);
-            System.out.println("Active query: " + queryToExecute);
             Selenide.refresh();
             return this;
         }
@@ -79,10 +78,10 @@ public class Task {
             queryToExecute = queryToExecute + queryBuilder.substring(0, queryBuilder.length() - 1) + "]')";
 
             Selenide.executeJavaScript(queryToExecute);
-            System.out.println("Completed query: " + queryToExecute);
             Selenide.refresh();
             return this;
         }
+
 
         public TaskBuilder atAllFilter(){
 
@@ -93,14 +92,14 @@ public class Task {
 
         public TaskBuilder atActiveFilter(){
 
-            open("https://todomvc4tasj.herokuapp.com/#/active");
+            $("https://todomvc4tasj.herokuapp.com/#/active");
 
             return this;
         }
 
         public TaskBuilder atCompletedFilter(){
 
-            open("https://todomvc4tasj.herokuapp.com/#/completed");
+            $("https://todomvc4tasj.herokuapp.com/#/completed");
 
             return this;
         }
