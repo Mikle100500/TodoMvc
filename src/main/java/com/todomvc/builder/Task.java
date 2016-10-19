@@ -1,7 +1,7 @@
 package com.todomvc.builder;
 
-//given().build() - ни одной таски
-//given().activeTasksRedo("a","b","c").completedTasksRedo("d", "e").atAllFilter().build() - разные таски на таком-то фильтре
+//given().build()
+//given().activeTasksRedo("a","b","c").completedTasksRedo("d", "e").atAllFilter().build()
 //given()......build()
 
 import java.util.ArrayList;
@@ -83,30 +83,52 @@ public class Task {
 
         public Task build() {
 
-            String queryToExecute = "localStorage.setItem('todos-troopjs','[";
-            String queryBuildActive = "";
-            String queryBuildCompleted = "";
+                String queryToExecute = "localStorage.setItem('todos-troopjs','[";
+                String queryBuildActive = "";
+                String queryBuildCompleted = "";
 
-            for (String task : this.activeTasks) {
-                queryBuildActive += "{\"completed\":false,\"title\":\""
-                        + task
-                        + "\"},";
-            }
+                if (!this.activeTasks.isEmpty()){
 
-            for (String task : this.completedTasks) {
-                queryBuildCompleted += "{\"completed\":true,\"title\":\""
-                        + task
-                        + "\"},";
-            }
+                    for (String task : this.activeTasks) {
 
-            queryToExecute = queryToExecute
-                    + queryBuildActive  //.substring(0, queryBuildActive.length() - 1)
-                    + queryBuildCompleted.substring(0, queryBuildCompleted.length() - 1)
-                    + "]')";
+                        queryBuildActive += "{\"completed\":false,\"title\":\""
+                                + task
+                                + "\"},";
+                    }
 
-            System.out.println(queryToExecute);
-            executeJavaScript(queryToExecute);
-            refresh();
+                    queryBuildActive = queryBuildActive.substring(0, queryBuildActive.length() - 1);
+                }
+
+                if (!this.completedTasks.isEmpty()) {
+
+                    for (String task : this.completedTasks) {
+
+                        queryBuildCompleted += "{\"completed\":true,\"title\":\""
+                                + task
+                                + "\"},";
+                    }
+
+                    queryBuildCompleted = queryBuildCompleted.substring(0, queryBuildCompleted.length() - 1);
+                }
+
+                if (!this.activeTasks.isEmpty() & !this.completedTasks.isEmpty()) {
+
+                    queryToExecute = queryToExecute
+                            + queryBuildActive
+                            + ","
+                            + queryBuildCompleted
+                            + "]')";
+                }else {
+                    queryToExecute = queryToExecute
+                            + queryBuildActive
+                            + queryBuildCompleted
+                            + "]')";
+                }
+
+                System.out.println(queryToExecute);
+                executeJavaScript(queryToExecute);
+                refresh();
+
 
             return new Task(this);
         }
