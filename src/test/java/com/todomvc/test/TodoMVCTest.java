@@ -3,8 +3,7 @@ package com.todomvc.test;
 import com.todomvc.pages.TaskManagerPage;
 import org.junit.Test;
 
-import static com.todomvc.helpers.GivenHelpers.given;
-import static com.todomvc.pages.TaskManagerPage.*;
+import static com.todomvc.helpers.Task.given;
 
 
 public class TodoMVCTest {

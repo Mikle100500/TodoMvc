@@ -120,7 +120,7 @@ public class Task {
                 }
 
                 executeJavaScript("localStorage.clear()");
-                refresh();
+                System.out.println(queryToExecute);
                 executeJavaScript(queryToExecute);
                 refresh();
 
