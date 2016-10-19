@@ -1,9 +1,9 @@
-package com.todomvc.testRedo;
+package com.todomvc.test;
 
 import com.todomvc.pages.TaskManagerPage;
 import org.junit.Test;
 
-import static com.todomvc.builder.Task.given;
+import static com.todomvc.helpers.Task.given;
 
 public class AtActiveFilterTest {
 
@@ -49,5 +49,44 @@ public class AtActiveFilterTest {
         page.assertItemsLeft(1);
     }
 
+    @Test
+    public void testCompleteAll(){
+
+        given().activeTasks("a", "b", "c").atActiveFilter().build();
+
+        page.toggleAll();
+        page.assertNoVisibleTasks();
+        page.assertItemsLeft(0);
+    }
+
+    @Test
+    public void testMoveToAll(){
+
+        given().activeTasks("a").atActiveFilter().build();
+
+        page.filterAll();
+        page.assertTasks("a");
+        page.assertItemsLeft(1);
+    }
+
+    @Test
+    public void testMoveToCompleted(){
+
+        given().completedTasks("a", "b").atActiveFilter().build();
+
+        page.filterCompleted();
+        page.assertVisibleTasks("a", "b");
+        page.assertItemsLeft(0);
+    }
+
+    @Test
+    public void testCancelEditByEsc(){
+
+        given().activeTasks("a").atActiveFilter().build();
+
+        page.startEdit("a", "a edited").pressEscape();
+        page.assertVisibleTasks("a");
+        page.assertItemsLeft(1);
+    }
 
 }

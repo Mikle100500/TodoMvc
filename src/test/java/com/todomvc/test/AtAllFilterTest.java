@@ -1,9 +1,9 @@
-package com.todomvc.testRedo;
+package com.todomvc.test;
 
 import com.todomvc.pages.TaskManagerPage;
 import org.junit.Test;
 
-import static com.todomvc.builder.Task.given;
+import static com.todomvc.helpers.Task.given;
 
 public class AtAllFilterTest {
 

@@ -1,5 +1,4 @@
-package com.todomvc.builder;
-import com.codeborne.selenide.Selenide;
+package com.todomvc.helpers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,8 +22,6 @@ public class Task {
         if (!url().equals("https://todomvc4tasj.herokuapp.com/")) {
             open("https://todomvc4tasj.herokuapp.com/");
         }
-
-        executeJavaScript("localStorage.clear()");
 
         return new TaskBuilder();
     }
@@ -56,24 +53,23 @@ public class Task {
             return this;
         }
 
-
         public TaskBuilder atAllFilter() {
 
-            $("https://todomvc4tasj.herokuapp.com/#");
+            open("https://todomvc4tasj.herokuapp.com/#");
 
             return this;
         }
 
         public TaskBuilder atActiveFilter() {
 
-            $("https://todomvc4tasj.herokuapp.com/#/active");
+            open("https://todomvc4tasj.herokuapp.com/#/active");
 
             return this;
         }
 
         public TaskBuilder atCompletedFilter() {
 
-            $("https://todomvc4tasj.herokuapp.com/#/completed");
+            open("https://todomvc4tasj.herokuapp.com/#/completed");
 
             return this;
         }
@@ -123,9 +119,10 @@ public class Task {
                             + "]')";
                 }
 
+                executeJavaScript("localStorage.clear()");
+                refresh();
                 executeJavaScript(queryToExecute);
                 refresh();
-
 
             return new Task(this);
         }
