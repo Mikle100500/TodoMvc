@@ -23,6 +23,8 @@ public class Task {
             open("https://todomvc4tasj.herokuapp.com/");
         }
 
+        executeJavaScript("localStorage.clear()");
+
         return new TaskBuilder();
     }
 
@@ -119,8 +121,7 @@ public class Task {
                             + "]')";
                 }
 
-                executeJavaScript("localStorage.clear()");
-                System.out.println(queryToExecute);
+
                 executeJavaScript(queryToExecute);
                 refresh();
 
