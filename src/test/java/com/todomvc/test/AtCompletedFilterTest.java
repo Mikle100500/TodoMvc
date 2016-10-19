@@ -28,4 +28,32 @@ public class AtCompletedFilterTest {
         page.assertNoVisibleTasks();
         page.assertItemsLeft(1);
     }
+
+    @Test
+    public void testClearCompleted(){
+
+        given().completedTasks("a", "b").atCompletedFilter().build();
+
+        page.clearCompleted();
+        page.assertNoVisibleTasks();
+    }
+
+    @Test
+    public void testMoveToAll(){
+
+        given().completedTasks("a").atCompletedFilter().build();
+
+        page.filterAll();
+        page.assertTasks("a");
+        page.assertItemsLeft(0);
+    }
+
+    @Test
+    public void testMoveToActive(){
+
+        given().completedTasks("a").atCompletedFilter().build();
+
+        page.filterActive();
+        page.assertNoVisibleTasks();
+    }
 }
