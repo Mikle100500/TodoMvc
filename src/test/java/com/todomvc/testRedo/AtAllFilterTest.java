@@ -41,6 +41,37 @@ public class AtAllFilterTest {
     }
 
     @Test
+    public void testComplete(){
+
+        given().activeTasks("a", "b").atAllFilter().build();
+
+        page.toggle("a");
+        page.assertTasks("a", "b");
+        page.assertItemsLeft(1);
+    }
+
+    @Test
+    public void testActivate(){
+
+        given().completedTasks("a").atAllFilter().build();
+
+        page.toggle("a");
+        page.assertTasks("a");
+        page.assertItemsLeft(1);
+    }
+
+    @Test
+    public void testCompleteAll(){
+
+        given().activeTasks("a", "b").atAllFilter().build();
+
+        page.toggleAll();
+        page.assertTasks("a", "b");
+        page.assertItemsLeft(0);
+    }
+
+
+    @Test
     public void testActivateAll(){
 
         given().completedTasks("a", "b", "c").atAllFilter().build();
