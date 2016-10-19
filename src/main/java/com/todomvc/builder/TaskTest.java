@@ -13,8 +13,8 @@ public class TaskTest {
     @Test
     public void testAtCompleted() {
 
-        given().activeTasks("a", "b").completedTasks("c", "d").atCompletedFilter().build();
-        page.assertVisibleTasks("a", "b", "c", "d");
+        given().activeTasks("a", "a").completedTasks("a", "a").atCompletedFilter().build();
+        page.assertVisibleTasks("a", "a", "a", "a");
         page.assertItemsLeft(2);
     }
 
