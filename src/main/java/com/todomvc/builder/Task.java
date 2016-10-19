@@ -1,9 +1,4 @@
 package com.todomvc.builder;
-
-//given().build()
-//given().activeTasksRedo("a","b","c").completedTasksRedo("d", "e").atAllFilter().build()
-//given()......build()
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -119,13 +114,13 @@ public class Task {
                             + queryBuildCompleted
                             + "]')";
                 }else {
+
                     queryToExecute = queryToExecute
                             + queryBuildActive
                             + queryBuildCompleted
                             + "]')";
                 }
 
-                System.out.println(queryToExecute);
                 executeJavaScript(queryToExecute);
                 refresh();
 

@@ -19,14 +19,14 @@ public class TodoMVCTest {
         page.create("a");
         page.assertTasks("a");
 
-        filterActive();
+        page.filterActive();
         page.assertVisibleTasks("a");
 
         page.create("b");
         page.toggleAll();
         page.assertNoVisibleTasks();
 
-        filterCompleted();
+        page.filterCompleted();
         page.assertVisibleTasks("a", "b");
 
         page.toggle("b");
@@ -35,7 +35,7 @@ public class TodoMVCTest {
         page.clearCompleted();
         page.assertNoVisibleTasks();
 
-        filterAll();
+        page.filterAll();
         page.delete("b");
         page.assertNoVisibleTasks();
     }
@@ -57,7 +57,7 @@ public class TodoMVCTest {
 
         given();
         page.create("b");
-        filterActive();
+        page.filterActive();
 
         page.startEdit("b", "b cancel edit").pressEscape();
         page.assertVisibleTasks("b");
@@ -71,7 +71,7 @@ public class TodoMVCTest {
         given();
         page.create("a", "b", "c", "d");
         page.toggleAll();
-        filterCompleted();
+        page.filterCompleted();
 
         page.toggleAll();
         page.assertNoVisibleTasks();

@@ -74,15 +74,15 @@ public class TaskManagerPage {
     }
 
     @Step
-    public static void filterAll() { $(By.linkText("All")).click(); }
+    public void filterAll() { $(By.linkText("All")).click(); }
 
     @Step
-    public static void filterActive() {
+    public void filterActive() {
         $(By.linkText("Active")).click();
     }
 
     @Step
-    public static void filterCompleted() {
+    public void filterCompleted() {
         $(By.linkText("Completed")).click();
     }
 

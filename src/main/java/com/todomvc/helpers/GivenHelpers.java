@@ -7,7 +7,6 @@ import java.util.List;
 
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.url;
-import static com.todomvc.pages.TaskManagerPage.*;
 
 public class GivenHelpers {
 
@@ -25,49 +24,49 @@ public class GivenHelpers {
         Selenide.refresh();
     }
 
-    public static void given(List<Task> tasks, String navigateToFilter) {
-
-        ensureURL();
-        Selenide.executeJavaScript("localStorage.clear()");
-
-        String queryToExecute = "localStorage.setItem('todos-troopjs','[";
-        String queryBuilder = "";
-
-        for (Task task : tasks) {
-            queryBuilder += "{\"completed\":"
-                    + task.status
-                    + ",\"title\":\""
-                    + task.name
-                    + "\"},";
-        }
-
-        queryToExecute = queryToExecute + queryBuilder.substring(0, queryBuilder.length() - 1) + "]')";
-
-        Selenide.executeJavaScript(queryToExecute);
-        Selenide.refresh();
-
-        if (navigateToFilter.equals("All")) {
-            filterAll();
-
-        } else if (navigateToFilter.equals("Active")) {
-            filterActive();
-
-        } else if (navigateToFilter.equals("Completed")) {
-            filterCompleted();
-        }
-
-    }
-
-    public static List<Task> build(TaskStatus taskStatus, String... taskNames) {
-
-        List<Task> tasks = new ArrayList<Task>();
-
-        for (String task : taskNames) {
-            tasks.add(new Task(taskStatus, task));
-        }
-
-        return tasks;
-    }
+//    public static void given(List<Task> tasks, String navigateToFilter) {
+//
+//        ensureURL();
+//        Selenide.executeJavaScript("localStorage.clear()");
+//
+//        String queryToExecute = "localStorage.setItem('todos-troopjs','[";
+//        String queryBuilder = "";
+//
+//        for (Task task : tasks) {
+//            queryBuilder += "{\"completed\":"
+//                    + task.status
+//                    + ",\"title\":\""
+//                    + task.name
+//                    + "\"},";
+//        }
+//
+//        queryToExecute = queryToExecute + queryBuilder.substring(0, queryBuilder.length() - 1) + "]')";
+//
+//        Selenide.executeJavaScript(queryToExecute);
+//        Selenide.refresh();
+//
+//        if (navigateToFilter.equals("All")) {
+//            filterAll();
+//
+//        } else if (navigateToFilter.equals("Active")) {
+//            filterActive();
+//
+//        } else if (navigateToFilter.equals("Completed")) {
+//            filterCompleted();
+//        }
+//
+//    }
+//
+//    public static List<Task> build(TaskStatus taskStatus, String... taskNames) {
+//
+//        List<Task> tasks = new ArrayList<Task>();
+//
+//        for (String task : taskNames) {
+//            tasks.add(new Task(taskStatus, task));
+//        }
+//
+//        return tasks;
+//    }
 
     public static class Task {
 
