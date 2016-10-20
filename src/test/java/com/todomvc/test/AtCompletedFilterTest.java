@@ -36,7 +36,7 @@ public class AtCompletedFilterTest {
         given().completedTasks("a", "b", "c").atCompletedFilter().build();
 
         page.toggleAll();
-        page.assertTasks("a", "b", "c");
+        page.assertNoVisibleTasks();
         page.assertItemsLeft(3);
     }
 

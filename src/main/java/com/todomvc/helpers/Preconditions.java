@@ -10,18 +10,17 @@ public class Preconditions {
 
     private final List<String> activeTasks;
     private final List<String> completedTasks;
+    private String filter;
+
 
     private Preconditions(PreconditionBuilder builder) {
 
         this.activeTasks = builder.activeTasks;
         this.completedTasks = builder.completedTasks;
+        this.filter = builder.filter;
     }
 
     public static PreconditionBuilder given() {
-
-        if (!url().equals("https://todomvc4tasj.herokuapp.com/")) {
-            open("https://todomvc4tasj.herokuapp.com/");
-        }
 
         return new PreconditionBuilder();
     }
@@ -30,6 +29,7 @@ public class Preconditions {
 
         private List<String> activeTasks;
         private List<String> completedTasks;
+        private String filter;
 
         public PreconditionBuilder() {
 
@@ -38,7 +38,6 @@ public class Preconditions {
         }
 
         public PreconditionBuilder activeTasks(String... tasks) {
-
 
             for (String task : tasks) {
                 this.activeTasks.add(task);
@@ -56,26 +55,27 @@ public class Preconditions {
 
         public PreconditionBuilder atAllFilter() {
 
-            open("https://todomvc4tasj.herokuapp.com/#");
-
+            this.filter = "https://todomvc4tasj.herokuapp.com/#";
             return this;
         }
 
         public PreconditionBuilder atActiveFilter() {
 
-            open("https://todomvc4tasj.herokuapp.com/#/active");
-
+            this.filter = "https://todomvc4tasj.herokuapp.com/#/active";
             return this;
         }
 
         public PreconditionBuilder atCompletedFilter() {
 
-            open("https://todomvc4tasj.herokuapp.com/#/completed");
-
+            this.filter = "https://todomvc4tasj.herokuapp.com/#/completed";
             return this;
         }
 
         public Preconditions build() {
+
+                if (!url().equals("https://todomvc4tasj.herokuapp.com/")) {
+                    open("https://todomvc4tasj.herokuapp.com/");
+                }
 
                 String queryToExecute = "localStorage.setItem('todos-troopjs','[";
                 String queryBuildActive = "";
@@ -120,9 +120,9 @@ public class Preconditions {
                             + "]')";
                 }
 
-
                 executeJavaScript(queryToExecute);
                 executeJavaScript("location.reload()");
+                open(this.filter);
 
             return new Preconditions(this);
         }
