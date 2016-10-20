@@ -3,6 +3,7 @@ package com.todomvc.test;
 import com.todomvc.pages.TaskManagerPage;
 import org.junit.Test;
 
+import static com.codeborne.selenide.Selenide.sleep;
 import static com.todomvc.helpers.Preconditions.given;
 
 
@@ -27,6 +28,16 @@ public class AtCompletedFilterTest {
         page.toggle("a");
         page.assertNoVisibleTasks();
         page.assertItemsLeft(1);
+    }
+
+    @Test
+    public void testActivateAll(){
+
+        given().completedTasks("a", "b", "c").atCompletedFilter().build();
+
+        page.toggleAll();
+        page.assertTasks("a", "b", "c");
+        page.assertItemsLeft(3);
     }
 
     @Test
@@ -55,5 +66,15 @@ public class AtCompletedFilterTest {
 
         page.filterActive();
         page.assertNoVisibleTasks();
+    }
+
+    @Test
+    public void testDeleteByEmptying(){
+
+        given().completedTasks("a").atCompletedFilter().build();
+        sleep(5000);
+        page.startEdit("a", "").pressEnter();
+        page.assertNoVisibleTasks();
+
     }
 }

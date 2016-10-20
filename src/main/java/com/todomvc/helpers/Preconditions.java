@@ -23,8 +23,6 @@ public class Preconditions {
             open("https://todomvc4tasj.herokuapp.com/");
         }
 
-        executeJavaScript("localStorage.clear()");
-
         return new PreconditionBuilder();
     }
 
@@ -124,7 +122,7 @@ public class Preconditions {
 
 
                 executeJavaScript(queryToExecute);
-                refresh();
+                executeJavaScript("location.reload()");
 
             return new Preconditions(this);
         }

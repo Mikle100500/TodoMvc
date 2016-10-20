@@ -3,6 +3,7 @@ package com.todomvc.test;
 import com.todomvc.pages.TaskManagerPage;
 import org.junit.Test;
 
+import static com.codeborne.selenide.Selenide.$;
 import static com.todomvc.helpers.Preconditions.given;
 
 public class AtActiveFilterTest {
@@ -87,6 +88,18 @@ public class AtActiveFilterTest {
         page.startEdit("a", "a edited").pressEscape();
         page.assertVisibleTasks("a");
         page.assertItemsLeft(1);
+    }
+
+    @Test
+    public void testConfirmEditClickOutside(){
+
+        given().activeTasks("a").atActiveFilter().build();
+
+        page.startEdit("a", "a edited");
+        $("#header").click();
+        page.assertVisibleTasks("a edited");
+        page.assertItemsLeft(1);
+
     }
 
 }

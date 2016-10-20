@@ -70,17 +70,6 @@ public class AtAllFilterTest {
         page.assertItemsLeft(0);
     }
 
-
-    @Test
-    public void testActivateAll(){
-
-        given().completedTasks("a", "b", "c").atAllFilter().build();
-
-        page.toggleAll();
-        page.assertTasks("a", "b", "c");
-        page.assertItemsLeft(3);
-    }
-
     @Test
     public void testClearCompleted(){
 
