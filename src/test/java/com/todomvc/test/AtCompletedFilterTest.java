@@ -72,7 +72,7 @@ public class AtCompletedFilterTest {
     public void testDeleteByEmptying(){
 
         given().completedTasks("a").atCompletedFilter().build();
-        sleep(5000);
+
         page.startEdit("a", "").pressEnter();
         page.assertNoVisibleTasks();
 

@@ -92,21 +92,20 @@ public class AtAllFilterTest {
     @Test
     public void testMoveToCompleted(){
 
-        given().activeTasks("a", "b").completedTasks("c", "d").atAllFilter().build();
+        given().completedTasks("c", "d").atAllFilter().build();
 
         page.filterCompleted();
         page.assertVisibleTasks("c", "d");
-        page.assertItemsLeft(2);
     }
 
     @Test
-    public void testCancelByEsc(){
+    public void testCancelEditByEsc(){
 
         given().activeTasks("a").completedTasks("b").atAllFilter().build();
 
         page.startEdit("a", "a edited").pressEscape();
         page.startEdit("b", "b edited").pressEscape();
-        page.assertTasks("a", "b");
+        page.assertVisibleTasks("a", "b");
         page.assertItemsLeft(1);
     }
 

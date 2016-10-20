@@ -41,7 +41,7 @@ public class Preconditions {
             for (String task : tasks) {
                 this.activeTasks.add(task);
             }
-         return this;
+            return this;
         }
 
         public PreconditionBuilder completedTasks(String... tasks) {

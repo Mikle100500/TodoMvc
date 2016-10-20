@@ -4,6 +4,7 @@ import com.todomvc.pages.TaskManagerPage;
 import org.junit.Test;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
 import static com.todomvc.helpers.Preconditions.given;
 
 public class AtActiveFilterTest {
@@ -101,5 +102,4 @@ public class AtActiveFilterTest {
         page.assertItemsLeft(1);
 
     }
-
 }
