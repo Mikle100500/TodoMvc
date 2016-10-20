@@ -76,7 +76,6 @@ public class Preconditions {
                 open("https://todomvc4tasj.herokuapp.com/");
             }
 
-            String queryToExecute = "localStorage.setItem('todos-troopjs','[";
             String queryBuildActive = "";
             String queryBuildCompleted = "";
 
@@ -105,26 +104,13 @@ public class Preconditions {
                             + "\"},";
                 }
 
-                queryBuildCompleted = queryBuildCompleted.substring(0, queryBuildCompleted.length() - 1);
+                queryBuildCompleted = "localStorage.setItem('todos-troopjs','["
+                        + queryBuildCompleted.substring(0, queryBuildCompleted.length() - 1)
+                        + "]')";
+
+                executeJavaScript(queryBuildCompleted);
             }
 
-            if (!this.activeTasks.isEmpty() & !this.completedTasks.isEmpty()) {
-
-                queryToExecute = queryToExecute
-                        + queryBuildActive
-                        + ","
-                        + queryBuildCompleted
-                        + "]')";
-            } else {
-
-                queryToExecute = queryToExecute
-                        + queryBuildActive
-                        + queryBuildCompleted
-                        + "]')";
-            }
-
-
-            executeJavaScript(queryToExecute);
             executeJavaScript("location.reload()");
             open(this.filter);
 
