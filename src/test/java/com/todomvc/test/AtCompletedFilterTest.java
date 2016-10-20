@@ -3,7 +3,7 @@ package com.todomvc.test;
 import com.todomvc.pages.TaskManagerPage;
 import org.junit.Test;
 
-import static com.todomvc.helpers.Task.given;
+import static com.todomvc.helpers.Preconditions.given;
 
 
 public class AtCompletedFilterTest {

@@ -6,18 +6,18 @@ import java.util.List;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverRunner.url;
 
-public class Task {
+public class Preconditions {
 
     private final List<String> activeTasks;
     private final List<String> completedTasks;
 
-    private Task(TaskBuilder builder) {
+    private Preconditions(PreconditionBuilder builder) {
 
         this.activeTasks = builder.activeTasks;
         this.completedTasks = builder.completedTasks;
     }
 
-    public static TaskBuilder given() {
+    public static PreconditionBuilder given() {
 
         if (!url().equals("https://todomvc4tasj.herokuapp.com/")) {
             open("https://todomvc4tasj.herokuapp.com/");
@@ -25,21 +25,22 @@ public class Task {
 
         executeJavaScript("localStorage.clear()");
 
-        return new TaskBuilder();
+        return new PreconditionBuilder();
     }
 
-    public static class TaskBuilder {
+    public static class PreconditionBuilder {
 
         private List<String> activeTasks;
         private List<String> completedTasks;
 
-        public TaskBuilder() {
+        public PreconditionBuilder() {
 
             activeTasks = new ArrayList<String>();
             completedTasks = new ArrayList<String>();
         }
 
-        public TaskBuilder activeTasks(String... tasks) {
+        public PreconditionBuilder activeTasks(String... tasks) {
+
 
             for (String task : tasks) {
                 this.activeTasks.add(task);
@@ -47,7 +48,7 @@ public class Task {
             return this;
         }
 
-        public TaskBuilder completedTasks(String... tasks) {
+        public PreconditionBuilder completedTasks(String... tasks) {
 
             for (String task : tasks) {
                 this.completedTasks.add(task);
@@ -55,28 +56,28 @@ public class Task {
             return this;
         }
 
-        public TaskBuilder atAllFilter() {
+        public PreconditionBuilder atAllFilter() {
 
             open("https://todomvc4tasj.herokuapp.com/#");
 
             return this;
         }
 
-        public TaskBuilder atActiveFilter() {
+        public PreconditionBuilder atActiveFilter() {
 
             open("https://todomvc4tasj.herokuapp.com/#/active");
 
             return this;
         }
 
-        public TaskBuilder atCompletedFilter() {
+        public PreconditionBuilder atCompletedFilter() {
 
             open("https://todomvc4tasj.herokuapp.com/#/completed");
 
             return this;
         }
 
-        public Task build() {
+        public Preconditions build() {
 
                 String queryToExecute = "localStorage.setItem('todos-troopjs','[";
                 String queryBuildActive = "";
@@ -125,7 +126,7 @@ public class Task {
                 executeJavaScript(queryToExecute);
                 refresh();
 
-            return new Task(this);
+            return new Preconditions(this);
         }
 
     }
