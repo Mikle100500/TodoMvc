@@ -21,7 +21,6 @@ public class Preconditions {
     }
 
     public static PreconditionBuilder given() {
-
         return new PreconditionBuilder();
     }
 
@@ -42,7 +41,7 @@ public class Preconditions {
             for (String task : tasks) {
                 this.activeTasks.add(task);
             }
-            return this;
+         return this;
         }
 
         public PreconditionBuilder completedTasks(String... tasks) {
@@ -73,56 +72,61 @@ public class Preconditions {
 
         public Preconditions build() {
 
-                if (!url().equals("https://todomvc4tasj.herokuapp.com/")) {
-                    open("https://todomvc4tasj.herokuapp.com/");
+            if (!url().equals("https://todomvc4tasj.herokuapp.com/")) {
+                open("https://todomvc4tasj.herokuapp.com/");
+            }
+
+            String queryToExecute = "localStorage.setItem('todos-troopjs','[";
+            String queryBuildActive = "";
+            String queryBuildCompleted = "";
+
+            if (!this.activeTasks.isEmpty()) {
+
+                for (String task : this.activeTasks) {
+
+                    queryBuildActive += "{\"completed\":false,\"title\":\""
+                            + task
+                            + "\"},";
                 }
 
-                String queryToExecute = "localStorage.setItem('todos-troopjs','[";
-                String queryBuildActive = "";
-                String queryBuildCompleted = "";
+                queryBuildActive = "localStorage.setItem('todos-troopjs','["
+                        + queryBuildActive.substring(0, queryBuildActive.length() - 1)
+                        + "]')";
 
-                if (!this.activeTasks.isEmpty()){
+                executeJavaScript(queryBuildActive);
+            }
 
-                    for (String task : this.activeTasks) {
+            if (!this.completedTasks.isEmpty()) {
 
-                        queryBuildActive += "{\"completed\":false,\"title\":\""
-                                + task
-                                + "\"},";
-                    }
+                for (String task : this.completedTasks) {
 
-                    queryBuildActive = queryBuildActive.substring(0, queryBuildActive.length() - 1);
+                    queryBuildCompleted += "{\"completed\":true,\"title\":\""
+                            + task
+                            + "\"},";
                 }
 
-                if (!this.completedTasks.isEmpty()) {
+                queryBuildCompleted = queryBuildCompleted.substring(0, queryBuildCompleted.length() - 1);
+            }
 
-                    for (String task : this.completedTasks) {
+            if (!this.activeTasks.isEmpty() & !this.completedTasks.isEmpty()) {
 
-                        queryBuildCompleted += "{\"completed\":true,\"title\":\""
-                                + task
-                                + "\"},";
-                    }
+                queryToExecute = queryToExecute
+                        + queryBuildActive
+                        + ","
+                        + queryBuildCompleted
+                        + "]')";
+            } else {
 
-                    queryBuildCompleted = queryBuildCompleted.substring(0, queryBuildCompleted.length() - 1);
-                }
+                queryToExecute = queryToExecute
+                        + queryBuildActive
+                        + queryBuildCompleted
+                        + "]')";
+            }
 
-                if (!this.activeTasks.isEmpty() & !this.completedTasks.isEmpty()) {
 
-                    queryToExecute = queryToExecute
-                            + queryBuildActive
-                            + ","
-                            + queryBuildCompleted
-                            + "]')";
-                }else {
-
-                    queryToExecute = queryToExecute
-                            + queryBuildActive
-                            + queryBuildCompleted
-                            + "]')";
-                }
-
-                executeJavaScript(queryToExecute);
-                executeJavaScript("location.reload()");
-                open(this.filter);
+            executeJavaScript(queryToExecute);
+            executeJavaScript("location.reload()");
+            open(this.filter);
 
             return new Preconditions(this);
         }
