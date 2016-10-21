@@ -76,10 +76,9 @@ public class Preconditions {
                 open("https://todomvc4tasj.herokuapp.com/");
             }
 
-            String queryBuildActive = "";
-            String queryBuildCompleted = "";
-
             if (!this.activeTasks.isEmpty()) {
+
+                String queryBuildActive = "";
 
                 for (String task : this.activeTasks) {
 
@@ -96,6 +95,8 @@ public class Preconditions {
             }
 
             if (!this.completedTasks.isEmpty()) {
+
+                String queryBuildCompleted = "";
 
                 for (String task : this.completedTasks) {
 
@@ -116,7 +117,5 @@ public class Preconditions {
 
             return new Preconditions(this);
         }
-
     }
-
 }
