@@ -28,6 +28,7 @@ public class Preconditions {
 
         private List<String> activeTasks;
         private List<String> completedTasks;
+        private List<Task> taskList;
         private String filter;
 
         public PreconditionBuilder() {
