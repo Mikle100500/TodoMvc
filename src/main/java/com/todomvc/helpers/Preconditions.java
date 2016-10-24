@@ -8,15 +8,15 @@ import static com.codeborne.selenide.WebDriverRunner.url;
 
 public class Preconditions {
 
-    private final List<String> activeTasks;
-    private final List<String> completedTasks;
+    private final List<String> taskNames;
+    private final List<String> taskStatus;
     private String filter;
 
 
     private Preconditions(PreconditionBuilder builder) {
 
-        this.activeTasks = builder.activeTasks;
-        this.completedTasks = builder.completedTasks;
+        this.taskNames = builder.taskNames;
+        this.taskStatus = builder.taskStatus;
         this.filter = builder.filter;
     }
 
@@ -26,21 +26,21 @@ public class Preconditions {
 
     public static class PreconditionBuilder {
 
-        private List<String> activeTasks;
-        private List<String> completedTasks;
-        private List<Task> taskList;
+        private List<String> taskNames;
+        private List<String> taskStatus;
         private String filter;
 
         public PreconditionBuilder() {
 
-            activeTasks = new ArrayList<String>();
-            completedTasks = new ArrayList<String>();
+            taskNames = new ArrayList<String>();
+            taskStatus = new ArrayList<String>();
         }
 
         public PreconditionBuilder activeTasks(String... tasks) {
 
             for (String task : tasks) {
-                this.activeTasks.add(task);
+                this.taskNames.add(task);
+                this.taskStatus.add("false");
             }
             return this;
         }
@@ -48,7 +48,8 @@ public class Preconditions {
         public PreconditionBuilder completedTasks(String... tasks) {
 
             for (String task : tasks) {
-                this.completedTasks.add(task);
+                this.taskNames.add(task);
+                this.taskStatus.add("true");
             }
             return this;
         }
@@ -77,40 +78,25 @@ public class Preconditions {
                 open("https://todomvc4tasj.herokuapp.com/");
             }
 
-            if (!this.activeTasks.isEmpty()) {
+            if (!this.taskNames.isEmpty()) {
 
-                String queryBuildActive = "";
+                String queryToExecute = "";
 
-                for (String task : this.activeTasks) {
+                for (int i = 0; i < this.taskNames.size(); i++) {
 
-                    queryBuildActive += "{\"completed\":false,\"title\":\""
-                            + task
+                    queryToExecute += "{\"completed\":"
+                            + this.taskStatus.get(i)
+                            + ",\"title\":\""
+                            + this.taskNames.get(i)
                             + "\"},";
                 }
 
-                queryBuildActive = "localStorage.setItem('todos-troopjs','["
-                        + queryBuildActive.substring(0, queryBuildActive.length() - 1)
+                queryToExecute = "localStorage.setItem('todos-troopjs','["
+                        + queryToExecute.substring(0, queryToExecute.length() - 1)
                         + "]')";
 
-                executeJavaScript(queryBuildActive);
-            }
-
-            if (!this.completedTasks.isEmpty()) {
-
-                String queryBuildCompleted = "";
-
-                for (String task : this.completedTasks) {
-
-                    queryBuildCompleted += "{\"completed\":true,\"title\":\""
-                            + task
-                            + "\"},";
-                }
-
-                queryBuildCompleted = "localStorage.setItem('todos-troopjs','["
-                        + queryBuildCompleted.substring(0, queryBuildCompleted.length() - 1)
-                        + "]')";
-
-                executeJavaScript(queryBuildCompleted);
+                System.out.print(queryToExecute);
+                executeJavaScript(queryToExecute);
             }
 
             executeJavaScript("location.reload()");
@@ -120,3 +106,4 @@ public class Preconditions {
         }
     }
 }
+
