@@ -34,6 +34,7 @@ public class Preconditions {
 
             taskNames = new ArrayList<String>();
             taskStatus = new ArrayList<String>();
+            filter = "https://todomvc4tasj.herokuapp.com";
         }
 
         public PreconditionBuilder activeTasks(String... tasks) {
