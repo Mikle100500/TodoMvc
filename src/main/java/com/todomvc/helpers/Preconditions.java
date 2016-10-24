@@ -40,6 +40,7 @@ public class Preconditions {
         public PreconditionBuilder activeTasks(String... tasks) {
 
             for (String task : tasks) {
+
                 this.taskNames.add(task);
                 this.taskStatus.add("false");
             }
@@ -49,6 +50,7 @@ public class Preconditions {
         public PreconditionBuilder completedTasks(String... tasks) {
 
             for (String task : tasks) {
+
                 this.taskNames.add(task);
                 this.taskStatus.add("true");
             }
@@ -96,7 +98,6 @@ public class Preconditions {
                         + queryToExecute.substring(0, queryToExecute.length() - 1)
                         + "]')";
 
-                System.out.print(queryToExecute);
                 executeJavaScript(queryToExecute);
             }
 
