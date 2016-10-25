@@ -18,12 +18,13 @@ import static com.codeborne.selenide.Selenide.$$;
 public class TaskManagerPage {
 
     private ElementsCollection tasks = $$("#todo-list>li");
+    public static final String newTaskLocator = "#new-todo";
 
     @Step
     public void create(String... taskNames) {
 
         for (String name : taskNames) {
-            $("#new-todo").setValue(name).pressEnter();
+            $(newTaskLocator).setValue(name).pressEnter();
         }
     }
 

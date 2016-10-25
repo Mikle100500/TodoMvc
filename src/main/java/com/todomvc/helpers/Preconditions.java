@@ -48,6 +48,7 @@ public class Preconditions {
 
             executeJavaScript(queryToExecute);
         }
+
         open(filter);
         executeJavaScript("location.reload()");
     }

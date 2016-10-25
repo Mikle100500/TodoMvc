@@ -70,6 +70,7 @@ public class TodoMVCTest {
     public void testActivateAllAtCompleted() {
 
         precondition().prepare();
+
         page.create("a", "b", "c", "d");
         page.toggleAll();
         page.filterCompleted();

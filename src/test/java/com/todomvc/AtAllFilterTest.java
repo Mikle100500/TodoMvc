@@ -32,11 +32,10 @@ public class AtAllFilterTest {
     @Test
     public void testDelete() {
 
-        precondition().activeTasks("a", "a to delete").completedTasks("b", "b to delete").atAllFilter().prepare();
+        precondition().activeTasks("a", "a to delete").atAllFilter().prepare();
 
         page.delete("a to delete");
-        page.delete("b to delete");
-        page.assertTasks("a", "b");
+        page.assertTasks("a");
         page.assertItemsLeft(1);
     }
 
@@ -82,20 +81,21 @@ public class AtAllFilterTest {
     @Test
     public void testSwitchToActive() {
 
-        precondition().activeTasks("a", "b", "c").atAllFilter().prepare();
+        precondition().activeTasks("a").completedTasks("b").activeTasks("c").atAllFilter().prepare();
 
         page.filterActive();
-        page.assertVisibleTasks("a", "b", "c");
-        page.assertItemsLeft(3);
+        page.assertVisibleTasks("a", "c");
+        page.assertItemsLeft(2);
     }
 
     @Test
     public void testSwitchToCompleted() {
 
-        precondition().completedTasks("c", "d").atAllFilter().prepare();
+        precondition().activeTasks("a", "b").completedTasks("c", "d").atAllFilter().prepare();
 
         page.filterCompleted();
         page.assertVisibleTasks("c", "d");
+        page.assertItemsLeft(2);
     }
 
     @Test

@@ -17,6 +17,7 @@ public class AtCompletedFilterTest {
 
         page.delete("a");
         page.assertVisibleTasks("b");
+        page.assertItemsLeft(0);
     }
 
     @Test
@@ -51,20 +52,21 @@ public class AtCompletedFilterTest {
     @Test
     public void testSwitchToAll(){
 
-        precondition().completedTasks("a").atCompletedFilter().prepare();
+        precondition().completedTasks("a").activeTasks("b").completedTasks("c").atCompletedFilter().prepare();
 
         page.filterAll();
-        page.assertTasks("a");
-        page.assertItemsLeft(0);
+        page.assertTasks("a", "b", "c");
+        page.assertItemsLeft(1);
     }
 
     @Test
     public void testSwitchToActive(){
 
-        precondition().completedTasks("a").atCompletedFilter().prepare();
+        precondition().completedTasks("a", "b", "c").activeTasks("d", "e").atCompletedFilter().prepare();
 
         page.filterActive();
-        page.assertNoVisibleTasks();
+        page.assertVisibleTasks("d", "e");
+        page.assertItemsLeft(2);
     }
 
     @Test

@@ -5,6 +5,8 @@ import org.junit.Test;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.todomvc.helpers.Preconditions.precondition;
+import static com.todomvc.pages.TaskManagerPage.newTaskLocator;
+
 
 public class AtActiveFilterTest {
 
@@ -13,21 +15,21 @@ public class AtActiveFilterTest {
     @Test
     public void testCreate() {
 
-        precondition().atActiveFilter().prepare();
+        precondition().activeTasks("b").atActiveFilter().prepare();
 
         page.create("a");
-        page.assertVisibleTasks("a");
-        page.assertItemsLeft(1);
+        page.assertVisibleTasks("b", "a");
+        page.assertItemsLeft(2);
     }
 
     @Test
     public void testEdit() {
 
-        precondition().activeTasks("a").atActiveFilter().prepare();
+        precondition().activeTasks("b", "a").atActiveFilter().prepare();
 
         page.startEdit("a", "a edited").pressEnter();
-        page.assertVisibleTasks("a edited");
-        page.assertItemsLeft(1);
+        page.assertVisibleTasks("b", "a edited");
+        page.assertItemsLeft(2);
     }
 
     @Test
@@ -65,29 +67,30 @@ public class AtActiveFilterTest {
 
         precondition().activeTasks("a", "b", "c").atActiveFilter().prepare();
 
-        page.toggleAll();
+        page.toggle("a");
         page.clearCompleted();
-        page.assertNoVisibleTasks();
+        page.assertVisibleTasks("b", "c");
+        page.assertItemsLeft(2);
     }
 
     @Test
     public void testSwitchToAll() {
 
-        precondition().activeTasks("a").atActiveFilter().prepare();
+        precondition().activeTasks("a").completedTasks("b").atActiveFilter().prepare();
 
         page.filterAll();
-        page.assertTasks("a");
+        page.assertTasks("a", "b");
         page.assertItemsLeft(1);
     }
 
     @Test
     public void testSwitchToCompleted() {
 
-        precondition().completedTasks("a", "b").atActiveFilter().prepare();
+        precondition().completedTasks("a", "b").activeTasks("c", "d").atActiveFilter().prepare();
 
         page.filterCompleted();
         page.assertVisibleTasks("a", "b");
-        page.assertItemsLeft(0);
+        page.assertItemsLeft(2);
     }
 
     @Test
@@ -106,7 +109,7 @@ public class AtActiveFilterTest {
         precondition().activeTasks("a").atActiveFilter().prepare();
 
         page.startEdit("a", "a edited");
-        $("#header").click();
+        $(newTaskLocator).click();
         page.assertVisibleTasks("a edited");
         page.assertItemsLeft(1);
 
