@@ -77,6 +77,5 @@ public class AtCompletedFilterTest {
         page.startEdit("a", "").pressEnter();
         page.assertVisibleTasks("b");
         page.assertItemsLeft(0);
-
     }
 }

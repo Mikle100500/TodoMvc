@@ -112,6 +112,5 @@ public class AtActiveFilterTest {
         $(newTaskLocator).click();
         page.assertVisibleTasks("a edited");
         page.assertItemsLeft(1);
-
     }
 }
