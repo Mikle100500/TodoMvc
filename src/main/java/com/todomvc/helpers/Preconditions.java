@@ -25,7 +25,7 @@ public class Preconditions {
     public void prepare() {
 
         if (!url().equals(URL)) {
-            open(URL);
+            open(filter);
             executeJavaScript("localStorage.clear()");
         }
 
@@ -49,7 +49,6 @@ public class Preconditions {
             executeJavaScript(queryToExecute);
         }
 
-        open(filter);
         executeJavaScript("location.reload()");
     }
 
