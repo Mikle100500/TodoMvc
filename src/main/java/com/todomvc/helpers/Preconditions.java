@@ -26,6 +26,7 @@ public class Preconditions {
 
         if (!url().equals(URL)) {
             open(URL);
+            executeJavaScript("localStorage.clear()");
         }
 
         if (!taskNames.isEmpty()) {

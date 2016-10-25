@@ -44,6 +44,7 @@ public class TodoMVCTest {
     public void testEditAtAll() {
 
         precondition().prepare();
+
         page.create("a");
 
         page.startEdit("a", "a edited").pressEnter();
@@ -55,6 +56,7 @@ public class TodoMVCTest {
     public void testCancelEditByEscAtActive() {
 
         precondition().prepare();
+
         page.create("b");
         page.filterActive();
 
