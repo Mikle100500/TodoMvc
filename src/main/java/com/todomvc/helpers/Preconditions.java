@@ -20,7 +20,7 @@ public class Preconditions {
         this.filter = builder.filter;
     }
 
-    public static PreconditionBuilder given() {
+    public static PreconditionBuilder precondition() {
         return new PreconditionBuilder();
     }
 
@@ -29,12 +29,13 @@ public class Preconditions {
         private List<String> taskNames;
         private List<String> taskStatus;
         private String filter;
+        private final String URL = "https://todomvc4tasj.herokuapp.com";
 
         public PreconditionBuilder() {
 
             taskNames = new ArrayList<String>();
             taskStatus = new ArrayList<String>();
-            filter = "https://todomvc4tasj.herokuapp.com";
+            filter = URL;
         }
 
         public PreconditionBuilder activeTasks(String... tasks) {
@@ -59,26 +60,26 @@ public class Preconditions {
 
         public PreconditionBuilder atAllFilter() {
 
-            this.filter = "https://todomvc4tasj.herokuapp.com/#";
+            this.filter = URL + "/#";
             return this;
         }
 
         public PreconditionBuilder atActiveFilter() {
 
-            this.filter = "https://todomvc4tasj.herokuapp.com/#/active";
+            this.filter = URL + "/#/active";
             return this;
         }
 
         public PreconditionBuilder atCompletedFilter() {
 
-            this.filter = "https://todomvc4tasj.herokuapp.com/#/completed";
+            this.filter = URL + "/#/completed";
             return this;
         }
 
         public Preconditions build() {
 
-            if (!url().equals("https://todomvc4tasj.herokuapp.com/")) {
-                open("https://todomvc4tasj.herokuapp.com/");
+            if (!url().equals(URL)) {
+                open(this.filter);
             }
 
             if (!this.taskNames.isEmpty()) {
@@ -102,7 +103,6 @@ public class Preconditions {
             }
 
             executeJavaScript("location.reload()");
-            open(this.filter);
 
             return new Preconditions(this);
         }

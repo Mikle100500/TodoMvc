@@ -1,20 +1,19 @@
-package com.todomvc.test;
+package com.todomvc;
 
 import com.todomvc.pages.TaskManagerPage;
 import org.junit.Test;
 
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.sleep;
-import static com.todomvc.helpers.Preconditions.given;
+import static com.todomvc.helpers.Preconditions.precondition;
 
 public class AtActiveFilterTest {
 
     private TaskManagerPage page = new TaskManagerPage();
 
     @Test
-    public void testCreate(){
+    public void testCreate() {
 
-        given().atActiveFilter().build();
+        precondition().atActiveFilter().build();
 
         page.create("a");
         page.assertVisibleTasks("a");
@@ -22,9 +21,9 @@ public class AtActiveFilterTest {
     }
 
     @Test
-    public void testEdit(){
+    public void testEdit() {
 
-        given().activeTasks("a").atActiveFilter().build();
+        precondition().activeTasks("a").atActiveFilter().build();
 
         page.startEdit("a", "a edited").pressEnter();
         page.assertVisibleTasks("a edited");
@@ -32,9 +31,9 @@ public class AtActiveFilterTest {
     }
 
     @Test
-    public void testDelete(){
+    public void testDelete() {
 
-        given().activeTasks("a", "b").atActiveFilter().build();
+        precondition().activeTasks("a", "b").atActiveFilter().build();
 
         page.delete("a");
         page.assertVisibleTasks("b");
@@ -42,9 +41,9 @@ public class AtActiveFilterTest {
     }
 
     @Test
-    public void testComplete(){
+    public void testComplete() {
 
-        given().activeTasks("a", "b").atActiveFilter().build();
+        precondition().activeTasks("a", "b").atActiveFilter().build();
 
         page.toggle("a");
         page.assertVisibleTasks("b");
@@ -52,9 +51,9 @@ public class AtActiveFilterTest {
     }
 
     @Test
-    public void testCompleteAll(){
+    public void testCompleteAll() {
 
-        given().activeTasks("a", "b", "c").atActiveFilter().build();
+        precondition().activeTasks("a", "b", "c").atActiveFilter().build();
 
         page.toggleAll();
         page.assertNoVisibleTasks();
@@ -62,9 +61,19 @@ public class AtActiveFilterTest {
     }
 
     @Test
-    public void testMoveToAll(){
+    public void testClearCompleted() {
 
-        given().activeTasks("a").atActiveFilter().build();
+        precondition().activeTasks("a", "b", "c").atActiveFilter().build();
+
+        page.toggleAll();
+        page.clearCompleted();
+        page.assertNoVisibleTasks();
+    }
+
+    @Test
+    public void testMoveToAll() {
+
+        precondition().activeTasks("a").atActiveFilter().build();
 
         page.filterAll();
         page.assertTasks("a");
@@ -72,9 +81,9 @@ public class AtActiveFilterTest {
     }
 
     @Test
-    public void testMoveToCompleted(){
+    public void testMoveToCompleted() {
 
-        given().completedTasks("a", "b").atActiveFilter().build();
+        precondition().completedTasks("a", "b").atActiveFilter().build();
 
         page.filterCompleted();
         page.assertVisibleTasks("a", "b");
@@ -82,9 +91,9 @@ public class AtActiveFilterTest {
     }
 
     @Test
-    public void testCancelEditByEsc(){
+    public void testCancelEditByEsc() {
 
-        given().activeTasks("a").atActiveFilter().build();
+        precondition().activeTasks("a").atActiveFilter().build();
 
         page.startEdit("a", "a edited").pressEscape();
         page.assertVisibleTasks("a");
@@ -92,9 +101,9 @@ public class AtActiveFilterTest {
     }
 
     @Test
-    public void testConfirmEditClickOutside(){
+    public void testConfirmEditClickOutside() {
 
-        given().activeTasks("a").atActiveFilter().build();
+        precondition().activeTasks("a").atActiveFilter().build();
 
         page.startEdit("a", "a edited");
         $("#header").click();

@@ -1,10 +1,9 @@
-package com.todomvc.test;
+package com.todomvc;
 
 import com.todomvc.pages.TaskManagerPage;
 import org.junit.Test;
 
-import static com.codeborne.selenide.Selenide.sleep;
-import static com.todomvc.helpers.Preconditions.given;
+import static com.todomvc.helpers.Preconditions.precondition;
 
 
 public class AtCompletedFilterTest {
@@ -14,7 +13,7 @@ public class AtCompletedFilterTest {
     @Test
     public void testDelete(){
 
-        given().completedTasks("a", "b").atCompletedFilter().build();
+        precondition().completedTasks("a", "b").atCompletedFilter().build();
 
         page.delete("a");
         page.assertVisibleTasks("b");
@@ -23,7 +22,7 @@ public class AtCompletedFilterTest {
     @Test
     public void testActivate(){
 
-        given().completedTasks("a").atCompletedFilter().build();
+        precondition().completedTasks("a").atCompletedFilter().build();
 
         page.toggle("a");
         page.assertNoVisibleTasks();
@@ -33,7 +32,7 @@ public class AtCompletedFilterTest {
     @Test
     public void testActivateAll(){
 
-        given().completedTasks("a", "b", "c").atCompletedFilter().build();
+        precondition().completedTasks("a", "b", "c").atCompletedFilter().build();
 
         page.toggleAll();
         page.assertNoVisibleTasks();
@@ -43,7 +42,7 @@ public class AtCompletedFilterTest {
     @Test
     public void testClearCompleted(){
 
-        given().completedTasks("a", "b").atCompletedFilter().build();
+        precondition().completedTasks("a", "b").atCompletedFilter().build();
 
         page.clearCompleted();
         page.assertNoVisibleTasks();
@@ -52,7 +51,7 @@ public class AtCompletedFilterTest {
     @Test
     public void testMoveToAll(){
 
-        given().completedTasks("a").atCompletedFilter().build();
+        precondition().completedTasks("a").atCompletedFilter().build();
 
         page.filterAll();
         page.assertTasks("a");
@@ -62,7 +61,7 @@ public class AtCompletedFilterTest {
     @Test
     public void testMoveToActive(){
 
-        given().completedTasks("a").atCompletedFilter().build();
+        precondition().completedTasks("a").atCompletedFilter().build();
 
         page.filterActive();
         page.assertNoVisibleTasks();
@@ -71,10 +70,11 @@ public class AtCompletedFilterTest {
     @Test
     public void testDeleteByEmptying(){
 
-        given().completedTasks("a").atCompletedFilter().build();
+        precondition().completedTasks("a", "b").atCompletedFilter().build();
 
         page.startEdit("a", "").pressEnter();
-        page.assertNoVisibleTasks();
+        page.assertVisibleTasks("b");
+        page.assertItemsLeft(0);
 
     }
 }

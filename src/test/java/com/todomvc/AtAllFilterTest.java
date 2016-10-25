@@ -1,18 +1,18 @@
-package com.todomvc.test;
+package com.todomvc;
 
 import com.todomvc.pages.TaskManagerPage;
 import org.junit.Test;
 
-import static com.todomvc.helpers.Preconditions.given;
+import static com.todomvc.helpers.Preconditions.precondition;
 
 public class AtAllFilterTest {
 
     private TaskManagerPage page = new TaskManagerPage();
 
     @Test
-    public void testCreate(){
+    public void testCreate() {
 
-        given().atAllFilter().build();
+        precondition().atAllFilter().build();
 
         page.create("a");
         page.assertTasks("a");
@@ -20,9 +20,9 @@ public class AtAllFilterTest {
     }
 
     @Test
-    public void testEdit(){
+    public void testEdit() {
 
-        given().activeTasks("a").atAllFilter().build();
+        precondition().activeTasks("a").atAllFilter().build();
 
         page.startEdit("a", "a edited").pressEnter();
         page.assertTasks("a edited");
@@ -30,9 +30,9 @@ public class AtAllFilterTest {
     }
 
     @Test
-    public void testDelete(){
+    public void testDelete() {
 
-        given().activeTasks("a", "active to delete").completedTasks("b", "completed to delete").atAllFilter().build();
+        precondition().activeTasks("a", "active to delete").completedTasks("b", "completed to delete").atAllFilter().build();
 
         page.delete("active to delete");
         page.delete("completed to delete");
@@ -41,9 +41,9 @@ public class AtAllFilterTest {
     }
 
     @Test
-    public void testComplete(){
+    public void testComplete() {
 
-        given().activeTasks("a", "b").atAllFilter().build();
+        precondition().activeTasks("a", "b").atAllFilter().build();
 
         page.toggle("a");
         page.assertTasks("a", "b");
@@ -51,9 +51,9 @@ public class AtAllFilterTest {
     }
 
     @Test
-    public void testActivate(){
+    public void testActivate() {
 
-        given().completedTasks("a").atAllFilter().build();
+        precondition().completedTasks("a").atAllFilter().build();
 
         page.toggle("a");
         page.assertTasks("a");
@@ -61,9 +61,9 @@ public class AtAllFilterTest {
     }
 
     @Test
-    public void testCompleteAll(){
+    public void testCompleteAll() {
 
-        given().activeTasks("a", "b").atAllFilter().build();
+        precondition().activeTasks("a", "b").atAllFilter().build();
 
         page.toggleAll();
         page.assertTasks("a", "b");
@@ -71,18 +71,18 @@ public class AtAllFilterTest {
     }
 
     @Test
-    public void testClearCompleted(){
+    public void testClearCompleted() {
 
-        given().completedTasks("a", "b", "c").atAllFilter().build();
+        precondition().completedTasks("a", "b", "c").atAllFilter().build();
 
         page.clearCompleted();
         page.assertNoVisibleTasks();
     }
 
     @Test
-    public void testMoveToActive(){
+    public void testMoveToActive() {
 
-        given().activeTasks("a", "b", "c").atAllFilter().build();
+        precondition().activeTasks("a", "b", "c").atAllFilter().build();
 
         page.filterActive();
         page.assertVisibleTasks("a", "b", "c");
@@ -90,18 +90,18 @@ public class AtAllFilterTest {
     }
 
     @Test
-    public void testMoveToCompleted(){
+    public void testMoveToCompleted() {
 
-        given().completedTasks("c", "d").atAllFilter().build();
+        precondition().completedTasks("c", "d").atAllFilter().build();
 
         page.filterCompleted();
         page.assertVisibleTasks("c", "d");
     }
 
     @Test
-    public void testCancelEditByEsc(){
+    public void testCancelEditByEsc() {
 
-        given().activeTasks("a").completedTasks("b").atAllFilter().build();
+        precondition().activeTasks("a").completedTasks("b").atAllFilter().build();
 
         page.startEdit("a", "a edited").pressEscape();
         page.startEdit("b", "b edited").pressEscape();
@@ -110,9 +110,9 @@ public class AtAllFilterTest {
     }
 
     @Test
-    public void testConfirmEditByTab(){
+    public void testConfirmEditByTab() {
 
-        given().activeTasks("a").completedTasks("b").atAllFilter().build();
+        precondition().activeTasks("a").completedTasks("b").atAllFilter().build();
 
         page.startEdit("a", "a edited").pressTab();
         page.startEdit("b", "b edited").pressTab();

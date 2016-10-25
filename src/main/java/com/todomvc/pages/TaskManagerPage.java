@@ -19,8 +19,6 @@ public class TaskManagerPage {
 
     private ElementsCollection tasks = $$("#todo-list>li");
 
-
-
     @Step
     public void create(String... taskNames) {
 
@@ -74,7 +72,9 @@ public class TaskManagerPage {
     }
 
     @Step
-    public void filterAll() { $(By.linkText("All")).click(); }
+    public void filterAll() {
+        $(By.linkText("All")).click();
+    }
 
     @Step
     public void filterActive() {
