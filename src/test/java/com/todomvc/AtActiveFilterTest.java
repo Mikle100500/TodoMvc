@@ -13,7 +13,7 @@ public class AtActiveFilterTest {
     @Test
     public void testCreate() {
 
-        precondition().atActiveFilter().build();
+        precondition().atActiveFilter().prepare();
 
         page.create("a");
         page.assertVisibleTasks("a");
@@ -23,7 +23,7 @@ public class AtActiveFilterTest {
     @Test
     public void testEdit() {
 
-        precondition().activeTasks("a").atActiveFilter().build();
+        precondition().activeTasks("a").atActiveFilter().prepare();
 
         page.startEdit("a", "a edited").pressEnter();
         page.assertVisibleTasks("a edited");
@@ -33,7 +33,7 @@ public class AtActiveFilterTest {
     @Test
     public void testDelete() {
 
-        precondition().activeTasks("a", "b").atActiveFilter().build();
+        precondition().activeTasks("a", "b").atActiveFilter().prepare();
 
         page.delete("a");
         page.assertVisibleTasks("b");
@@ -43,7 +43,7 @@ public class AtActiveFilterTest {
     @Test
     public void testComplete() {
 
-        precondition().activeTasks("a", "b").atActiveFilter().build();
+        precondition().activeTasks("a", "b").atActiveFilter().prepare();
 
         page.toggle("a");
         page.assertVisibleTasks("b");
@@ -53,7 +53,7 @@ public class AtActiveFilterTest {
     @Test
     public void testCompleteAll() {
 
-        precondition().activeTasks("a", "b", "c").atActiveFilter().build();
+        precondition().activeTasks("a", "b", "c").atActiveFilter().prepare();
 
         page.toggleAll();
         page.assertNoVisibleTasks();
@@ -63,7 +63,7 @@ public class AtActiveFilterTest {
     @Test
     public void testClearCompleted() {
 
-        precondition().activeTasks("a", "b", "c").atActiveFilter().build();
+        precondition().activeTasks("a", "b", "c").atActiveFilter().prepare();
 
         page.toggleAll();
         page.clearCompleted();
@@ -71,9 +71,9 @@ public class AtActiveFilterTest {
     }
 
     @Test
-    public void testMoveToAll() {
+    public void testSwitchToAll() {
 
-        precondition().activeTasks("a").atActiveFilter().build();
+        precondition().activeTasks("a").atActiveFilter().prepare();
 
         page.filterAll();
         page.assertTasks("a");
@@ -81,9 +81,9 @@ public class AtActiveFilterTest {
     }
 
     @Test
-    public void testMoveToCompleted() {
+    public void testSwitchToCompleted() {
 
-        precondition().completedTasks("a", "b").atActiveFilter().build();
+        precondition().completedTasks("a", "b").atActiveFilter().prepare();
 
         page.filterCompleted();
         page.assertVisibleTasks("a", "b");
@@ -93,7 +93,7 @@ public class AtActiveFilterTest {
     @Test
     public void testCancelEditByEsc() {
 
-        precondition().activeTasks("a").atActiveFilter().build();
+        precondition().activeTasks("a").atActiveFilter().prepare();
 
         page.startEdit("a", "a edited").pressEscape();
         page.assertVisibleTasks("a");
@@ -103,7 +103,7 @@ public class AtActiveFilterTest {
     @Test
     public void testConfirmEditClickOutside() {
 
-        precondition().activeTasks("a").atActiveFilter().build();
+        precondition().activeTasks("a").atActiveFilter().prepare();
 
         page.startEdit("a", "a edited");
         $("#header").click();

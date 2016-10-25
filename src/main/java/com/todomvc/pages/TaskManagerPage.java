@@ -55,14 +55,9 @@ public class TaskManagerPage {
         tasks.filter(visible).shouldHave(exactTexts(taskNames));
     }
 
-    public void assertNoVisibleTasks() {
-        tasks.filter(visible).shouldBe(empty);
-    }
+    public void assertNoVisibleTasks() { tasks.filter(visible).shouldBe(empty); }
 
-    public void assertItemsLeft(int itemsLeft) {
-
-        $("#todo-count>strong").shouldHave(exactText(Integer.toString(itemsLeft)));
-    }
+    public void assertItemsLeft(int itemsLeft) { $("#todo-count>strong").shouldHave(exactText(Integer.toString(itemsLeft))); }
 
     @Step
     public SelenideElement startEdit(String oldTaskName, String newTaskName) {
@@ -72,9 +67,7 @@ public class TaskManagerPage {
     }
 
     @Step
-    public void filterAll() {
-        $(By.linkText("All")).click();
-    }
+    public void filterAll() { $(By.linkText("All")).click(); }
 
     @Step
     public void filterActive() {

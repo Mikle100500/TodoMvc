@@ -13,7 +13,7 @@ public class AtCompletedFilterTest {
     @Test
     public void testDelete(){
 
-        precondition().completedTasks("a", "b").atCompletedFilter().build();
+        precondition().completedTasks("a", "b").atCompletedFilter().prepare();
 
         page.delete("a");
         page.assertVisibleTasks("b");
@@ -22,7 +22,7 @@ public class AtCompletedFilterTest {
     @Test
     public void testActivate(){
 
-        precondition().completedTasks("a").atCompletedFilter().build();
+        precondition().completedTasks("a").atCompletedFilter().prepare();
 
         page.toggle("a");
         page.assertNoVisibleTasks();
@@ -32,7 +32,7 @@ public class AtCompletedFilterTest {
     @Test
     public void testActivateAll(){
 
-        precondition().completedTasks("a", "b", "c").atCompletedFilter().build();
+        precondition().completedTasks("a", "b", "c").atCompletedFilter().prepare();
 
         page.toggleAll();
         page.assertNoVisibleTasks();
@@ -42,16 +42,16 @@ public class AtCompletedFilterTest {
     @Test
     public void testClearCompleted(){
 
-        precondition().completedTasks("a", "b").atCompletedFilter().build();
+        precondition().completedTasks("a").atCompletedFilter().prepare();
 
         page.clearCompleted();
         page.assertNoVisibleTasks();
     }
 
     @Test
-    public void testMoveToAll(){
+    public void testSwitchToAll(){
 
-        precondition().completedTasks("a").atCompletedFilter().build();
+        precondition().completedTasks("a").atCompletedFilter().prepare();
 
         page.filterAll();
         page.assertTasks("a");
@@ -59,9 +59,9 @@ public class AtCompletedFilterTest {
     }
 
     @Test
-    public void testMoveToActive(){
+    public void testSwitchToActive(){
 
-        precondition().completedTasks("a").atCompletedFilter().build();
+        precondition().completedTasks("a").atCompletedFilter().prepare();
 
         page.filterActive();
         page.assertNoVisibleTasks();
@@ -70,7 +70,7 @@ public class AtCompletedFilterTest {
     @Test
     public void testDeleteByEmptying(){
 
-        precondition().completedTasks("a", "b").atCompletedFilter().build();
+        precondition().completedTasks("a", "b").atCompletedFilter().prepare();
 
         page.startEdit("a", "").pressEnter();
         page.assertVisibleTasks("b");

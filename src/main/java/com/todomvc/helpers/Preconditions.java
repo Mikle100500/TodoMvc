@@ -10,8 +10,8 @@ public class Preconditions {
 
     private final List<String> taskNames;
     private final List<String> taskStatus;
-    private String filter;
-
+    private final String filter;
+    private final static String URL = "https://todomvc4tasj.herokuapp.com";
 
     private Preconditions(PreconditionBuilder builder) {
 
@@ -21,21 +21,55 @@ public class Preconditions {
     }
 
     public static PreconditionBuilder precondition() {
+
         return new PreconditionBuilder();
+    }
+
+    public void prepare() {
+
+        if (!url().equals(URL)) {
+            open(URL);
+            executeJavaScript("localStorage.clear()");
+        }
+
+        if (!taskNames.isEmpty()) {
+
+            String queryToExecute = "";
+
+            for (int i = 0; i < taskNames.size(); i++) {
+
+                queryToExecute += "{\"completed\":"
+                        + taskStatus.get(i)
+                        + ",\"title\":\""
+                        + taskNames.get(i)
+                        + "\"},";
+            }
+
+            queryToExecute = "localStorage.setItem('todos-troopjs','["
+                    + queryToExecute.substring(0, queryToExecute.length() - 1)
+                    + "]')";
+
+            executeJavaScript(queryToExecute);
+        }
+        open(filter);
+        executeJavaScript("location.reload()");
     }
 
     public static class PreconditionBuilder {
 
         private List<String> taskNames;
         private List<String> taskStatus;
-        private String filter;
-        private final String URL = "https://todomvc4tasj.herokuapp.com";
+        private String filter = URL;
+
 
         public PreconditionBuilder() {
 
             taskNames = new ArrayList<String>();
             taskStatus = new ArrayList<String>();
-            filter = URL;
+        }
+
+        public void prepare() {
+            build().prepare();
         }
 
         public PreconditionBuilder activeTasks(String... tasks) {
@@ -77,33 +111,6 @@ public class Preconditions {
         }
 
         public Preconditions build() {
-
-            if (!url().equals(URL)) {
-                open(this.filter);
-            }
-
-            if (!this.taskNames.isEmpty()) {
-
-                String queryToExecute = "";
-
-                for (int i = 0; i < this.taskNames.size(); i++) {
-
-                    queryToExecute += "{\"completed\":"
-                            + this.taskStatus.get(i)
-                            + ",\"title\":\""
-                            + this.taskNames.get(i)
-                            + "\"},";
-                }
-
-                queryToExecute = "localStorage.setItem('todos-troopjs','["
-                        + queryToExecute.substring(0, queryToExecute.length() - 1)
-                        + "]')";
-
-                executeJavaScript(queryToExecute);
-            }
-
-            executeJavaScript("location.reload()");
-
             return new Preconditions(this);
         }
     }
