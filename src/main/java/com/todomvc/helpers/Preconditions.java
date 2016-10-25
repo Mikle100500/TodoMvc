@@ -20,16 +20,12 @@ public class Preconditions {
         this.filter = builder.filter;
     }
 
-    public static PreconditionBuilder precondition() {
-
-        return new PreconditionBuilder();
-    }
+    public static PreconditionBuilder precondition() { return new PreconditionBuilder(); }
 
     public void prepare() {
 
         if (!url().equals(URL)) {
             open(URL);
-            executeJavaScript("localStorage.clear()");
         }
 
         if (!taskNames.isEmpty()) {
@@ -68,9 +64,7 @@ public class Preconditions {
             taskStatus = new ArrayList<String>();
         }
 
-        public void prepare() {
-            build().prepare();
-        }
+        public void prepare() { build().prepare(); }
 
         public PreconditionBuilder activeTasks(String... tasks) {
 
@@ -110,9 +104,7 @@ public class Preconditions {
             return this;
         }
 
-        public Preconditions build() {
-            return new Preconditions(this);
-        }
+        public Preconditions build() { return new Preconditions(this); }
     }
 }
 
