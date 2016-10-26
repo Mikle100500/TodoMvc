@@ -26,9 +26,8 @@ public class Preconditions {
     public void prepare() {
 
         open(filter);
-//        executeJavaScript("localStorage.clear()");
 
-        String queryToExecute = "  ";
+        String queryToExecute = " ";
 
         for (int i = 0; i < taskNames.size(); i++) {
 
