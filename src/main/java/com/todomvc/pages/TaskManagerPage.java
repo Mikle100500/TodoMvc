@@ -18,13 +18,13 @@ import static com.codeborne.selenide.Selenide.$$;
 public class TaskManagerPage {
 
     private ElementsCollection tasks = $$("#todo-list>li");
-    public static final String newTaskLocator = "#new-todo";
+    public final SelenideElement newTodo = $("#new-todo");
 
     @Step
     public void create(String... taskNames) {
 
         for (String name : taskNames) {
-            $(newTaskLocator).setValue(name).pressEnter();
+            newTodo.setValue(name).pressEnter();
         }
     }
 
@@ -56,9 +56,13 @@ public class TaskManagerPage {
         tasks.filter(visible).shouldHave(exactTexts(taskNames));
     }
 
-    public void assertNoVisibleTasks() { tasks.filter(visible).shouldBe(empty); }
+    public void assertNoVisibleTasks() {
+        tasks.filter(visible).shouldBe(empty);
+    }
 
-    public void assertItemsLeft(int itemsLeft) { $("#todo-count>strong").shouldHave(exactText(Integer.toString(itemsLeft))); }
+    public void assertItemsLeft(int itemsLeft) {
+        $("#todo-count>strong").shouldHave(exactText(Integer.toString(itemsLeft)));
+    }
 
     @Step
     public SelenideElement startEdit(String oldTaskName, String newTaskName) {
@@ -68,7 +72,9 @@ public class TaskManagerPage {
     }
 
     @Step
-    public void filterAll() { $(By.linkText("All")).click(); }
+    public void filterAll() {
+        $(By.linkText("All")).click();
+    }
 
     @Step
     public void filterActive() {

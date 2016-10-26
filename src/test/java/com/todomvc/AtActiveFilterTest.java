@@ -3,9 +3,7 @@ package com.todomvc;
 import com.todomvc.pages.TaskManagerPage;
 import org.junit.Test;
 
-import static com.codeborne.selenide.Selenide.$;
 import static com.todomvc.helpers.Preconditions.precondition;
-import static com.todomvc.pages.TaskManagerPage.newTaskLocator;
 
 
 public class AtActiveFilterTest {
@@ -109,7 +107,7 @@ public class AtActiveFilterTest {
         precondition().activeTasks("a").atActiveFilter().prepare();
 
         page.startEdit("a", "a edited");
-        $(newTaskLocator).click();
+        page.newTodo.click();
         page.assertVisibleTasks("a edited");
         page.assertItemsLeft(1);
     }

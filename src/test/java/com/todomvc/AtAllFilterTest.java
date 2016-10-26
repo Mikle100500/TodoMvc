@@ -1,5 +1,6 @@
 package com.todomvc;
 
+import com.codeborne.selenide.Selenide;
 import com.todomvc.pages.TaskManagerPage;
 import org.junit.Test;
 
@@ -63,7 +64,7 @@ public class AtAllFilterTest {
     public void testCompleteAll() {
 
         precondition().activeTasks("a", "b").atAllFilter().prepare();
-
+        Selenide.sleep(5000);
         page.toggleAll();
         page.assertTasks("a", "b");
         page.assertItemsLeft(0);
