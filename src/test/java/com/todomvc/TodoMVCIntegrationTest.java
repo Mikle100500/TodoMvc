@@ -6,7 +6,7 @@ import org.junit.Test;
 import static com.todomvc.helpers.Preconditions.precondition;
 
 
-public class TodoMVCTest {
+public class TodoMVCIntegrationTest {
 
     private TaskManagerPage page = new TaskManagerPage();
 
