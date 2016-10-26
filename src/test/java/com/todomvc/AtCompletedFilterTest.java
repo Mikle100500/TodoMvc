@@ -11,7 +11,7 @@ public class AtCompletedFilterTest {
     private TaskManagerPage page = new TaskManagerPage();
 
     @Test
-    public void testDelete(){
+    public void testDelete() {
 
         precondition().completedTasks("a", "b").atCompletedFilter().prepare();
 
@@ -21,7 +21,7 @@ public class AtCompletedFilterTest {
     }
 
     @Test
-    public void testActivate(){
+    public void testActivate() {
 
         precondition().completedTasks("a").atCompletedFilter().prepare();
 
@@ -31,17 +31,17 @@ public class AtCompletedFilterTest {
     }
 
     @Test
-    public void testActivateAll(){
+    public void testActivateAll() {
 
-        precondition().completedTasks("a", "b", "c").atCompletedFilter().prepare();
+        precondition().completedTasks("a", "b").atCompletedFilter().prepare();
 
         page.toggleAll();
         page.assertNoVisibleTasks();
-        page.assertItemsLeft(3);
+        page.assertItemsLeft(2);
     }
 
     @Test
-    public void testClearCompleted(){
+    public void testClearCompleted() {
 
         precondition().completedTasks("a").atCompletedFilter().prepare();
 
@@ -50,7 +50,7 @@ public class AtCompletedFilterTest {
     }
 
     @Test
-    public void testSwitchToAll(){
+    public void testSwitchToAll() {
 
         precondition().completedTasks("a").activeTasks("b").completedTasks("c").atCompletedFilter().prepare();
 
@@ -60,7 +60,7 @@ public class AtCompletedFilterTest {
     }
 
     @Test
-    public void testSwitchToActive(){
+    public void testSwitchToActive() {
 
         precondition().completedTasks("a", "b", "c").activeTasks("d", "e").atCompletedFilter().prepare();
 
@@ -70,7 +70,7 @@ public class AtCompletedFilterTest {
     }
 
     @Test
-    public void testDeleteByEmptying(){
+    public void testDeleteByEmptying() {
 
         precondition().completedTasks("a", "b").atCompletedFilter().prepare();
 

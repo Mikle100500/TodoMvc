@@ -102,12 +102,11 @@ public class AtAllFilterTest {
     @Test
     public void testCancelEditByEsc() {
 
-        precondition().activeTasks("a").completedTasks("b").atAllFilter().prepare();
+        precondition().completedTasks("a", "b").atAllFilter().prepare();
 
         page.startEdit("a", "a edited").pressEscape();
-        page.startEdit("b", "b edited").pressEscape();
         page.assertVisibleTasks("a", "b");
-        page.assertItemsLeft(1);
+        page.assertItemsLeft(2);
     }
 
     @Test

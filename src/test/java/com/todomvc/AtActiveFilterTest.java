@@ -63,9 +63,8 @@ public class AtActiveFilterTest {
     @Test
     public void testClearCompleted() {
 
-        precondition().activeTasks("a", "b", "c").atActiveFilter().prepare();
+        precondition().completedTasks("a").activeTasks("b", "c").atActiveFilter().prepare();
 
-        page.toggle("a");
         page.clearCompleted();
         page.assertVisibleTasks("b", "c");
         page.assertItemsLeft(2);
@@ -94,10 +93,10 @@ public class AtActiveFilterTest {
     @Test
     public void testCancelEditByEsc() {
 
-        precondition().activeTasks("a").atActiveFilter().prepare();
+        precondition().activeTasks("a", "b").atActiveFilter().prepare();
 
-        page.startEdit("a", "a edited").pressEscape();
-        page.assertVisibleTasks("a");
+        page.startEdit("b", "b edited").pressEscape();
+        page.assertVisibleTasks("a", "b");
         page.assertItemsLeft(1);
     }
 
