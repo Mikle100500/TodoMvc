@@ -48,16 +48,9 @@ public class Preconditions {
 
     public static class PreconditionBuilder {
 
-        private List<String> taskNames;
-        private List<String> taskStatus;
+        private List<String> taskNames = new ArrayList<String>();
+        private List<String> taskStatus = new ArrayList<String>();
         private String filter = URL;
-
-
-        public PreconditionBuilder() {
-
-            taskNames = new ArrayList<String>();
-            taskStatus = new ArrayList<String>();
-        }
 
         private void fillTasksList(String status, String... tasks) {
 
