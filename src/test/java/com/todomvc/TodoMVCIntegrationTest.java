@@ -40,45 +40,4 @@ public class TodoMVCIntegrationTest {
     }
 
 
-    @Test
-    public void testEditAtAll() {
-
-        precondition().prepare();
-
-        page.create("a");
-
-        page.startEdit("a", "a edited").pressEnter();
-        page.assertVisibleTasks("a edited");
-        page.assertItemsLeft(1);
-    }
-
-    @Test
-    public void testCancelEditByEscAtActive() {
-
-        precondition().prepare();
-
-        page.create("b");
-        page.filterActive();
-
-        page.startEdit("b", "b cancel edit").pressEscape();
-        page.assertVisibleTasks("b");
-        page.assertItemsLeft(1);
-    }
-
-    // extra coverage
-    @Test
-    public void testActivateAllAtCompleted() {
-
-        precondition().prepare();
-
-        page.create("a", "b", "c", "d");
-        page.toggleAll();
-        page.filterCompleted();
-
-        page.toggleAll();
-        page.assertNoVisibleTasks();
-        page.assertItemsLeft(4);
-
-    }
-
 }

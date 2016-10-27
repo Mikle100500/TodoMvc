@@ -85,6 +85,4 @@ public class TaskManagerPage {
     public void filterCompleted() {
         $(By.linkText("Completed")).click();
     }
-
-
 }
