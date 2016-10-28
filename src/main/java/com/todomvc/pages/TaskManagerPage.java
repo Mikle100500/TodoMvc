@@ -17,8 +17,8 @@ import static com.codeborne.selenide.Selenide.$$;
 
 public class TaskManagerPage {
 
-    private ElementsCollection tasks = $$("#todo-list>li");
-    public final SelenideElement newTodo = $("#new-todo");
+    public ElementsCollection tasks = $$("#todo-list>li");
+    public SelenideElement newTodo = $("#new-todo");
 
     @Step
     public void create(String... taskNames) {
