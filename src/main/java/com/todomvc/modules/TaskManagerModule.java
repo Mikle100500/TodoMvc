@@ -14,7 +14,7 @@ import static com.codeborne.selenide.Selenide.$$;
 
 public class TaskManagerModule {
 
-    public static ElementsCollection tasks = $$("#todo-list>li");
+    private static ElementsCollection tasks = $$("#todo-list>li");
     public static final SelenideElement newTodo = $("#new-todo");
 
     @Step
