@@ -30,7 +30,6 @@ public class Preconditions {
             open(filter);
         }
 
-
         String queryToExecute = " ";
 
         for (int i = 0; i < taskNames.size(); i++) {
