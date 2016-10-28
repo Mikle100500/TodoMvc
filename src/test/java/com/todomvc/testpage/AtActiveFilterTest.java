@@ -1,4 +1,4 @@
-package com.todomvc;
+package com.todomvc.testpage;
 
 import com.todomvc.pages.TaskManagerPage;
 import org.junit.Test;
