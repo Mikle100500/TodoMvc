@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.WebDriverRunner.url;
 
 public class Preconditions {
 
@@ -25,7 +26,10 @@ public class Preconditions {
 
     public void prepare() {
 
-        open(filter);
+        if (!url().equals(filter)) {
+            open(filter);
+        }
+
 
         String queryToExecute = " ";
 
@@ -74,6 +78,8 @@ public class Preconditions {
         }
 
         public PreconditionBuilder atAllFilter() {
+
+            this.filter = URL;
             return this;
         }
 
