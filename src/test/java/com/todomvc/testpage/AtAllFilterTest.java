@@ -105,7 +105,7 @@ public class AtAllFilterTest {
 
         page.startEdit("a", "a edited").pressEscape();
         page.assertVisibleTasks("a");
-        page.assertItemsLeft(1);
+        page.assertItemsLeft(0);
     }
 
     @Test
@@ -114,7 +114,7 @@ public class AtAllFilterTest {
         precondition().activeTasks("a").atAllFilter().prepare();
 
         page.startEdit("a", "a edited").pressTab();
-        page.assertTasks("a edited", "b edited");
+        page.assertTasks("a edited");
         page.assertItemsLeft(1);
     }
 }

@@ -91,10 +91,10 @@ public class AtActiveFilterModuleTest {
     @Test
     public void testCancelEditByEsc() {
 
-        precondition().activeTasks("a", "b").atActiveFilter().prepare();
+        precondition().activeTasks("a").completedTasks("b").atActiveFilter().prepare();
 
-        startEdit("b", "b edited").pressEscape();
-        assertVisibleTasks("a", "b");
+        startEdit("a", "a edited").pressEscape();
+        assertVisibleTasks("a");
         assertItemsLeft(1);
     }
 

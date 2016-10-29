@@ -106,7 +106,7 @@ public class AtAllFilterModuleTest {
 
         startEdit("a", "a edited").pressEscape();
         assertVisibleTasks("a");
-        assertItemsLeft(1);
+        assertItemsLeft(0);
     }
 
     @Test
@@ -115,7 +115,7 @@ public class AtAllFilterModuleTest {
         precondition().completedTasks("b").atAllFilter().prepare();
 
         startEdit("b", "b edited").pressTab();
-        assertTasks("a edited", "b edited");
-        assertItemsLeft(1);
+        assertTasks("b edited");
+        assertItemsLeft(0);
     }
 }
