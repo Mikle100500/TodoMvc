@@ -97,7 +97,7 @@ public class AtActiveFilterTest {
 
         page.startEdit("b", "b edited").pressEscape();
         page.assertVisibleTasks("a", "b");
-        page.assertItemsLeft(1);
+        page.assertItemsLeft(2);
     }
 
     @Test

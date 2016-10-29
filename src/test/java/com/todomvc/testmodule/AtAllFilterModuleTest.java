@@ -1,4 +1,4 @@
-package com.todomvc.testmodules;
+package com.todomvc.testmodule;
 
 import com.codeborne.selenide.Selenide;
 
@@ -9,7 +9,6 @@ import org.junit.Test;
 import static com.todomvc.helpers.Preconditions.precondition;
 
 public class AtAllFilterModuleTest {
-
 
     @Test
     public void testCreate() {
@@ -65,7 +64,7 @@ public class AtAllFilterModuleTest {
     public void testCompleteAll() {
 
         precondition().activeTasks("a", "b").atAllFilter().prepare();
-        Selenide.sleep(5000);
+
         toggleAll();
         assertTasks("a", "b");
         assertItemsLeft(0);
@@ -103,19 +102,18 @@ public class AtAllFilterModuleTest {
     @Test
     public void testCancelEditByEsc() {
 
-        precondition().completedTasks("a", "b").atAllFilter().prepare();
+        precondition().completedTasks("a").atAllFilter().prepare();
 
         startEdit("a", "a edited").pressEscape();
-        assertVisibleTasks("a", "b");
-        assertItemsLeft(2);
+        assertVisibleTasks("a");
+        assertItemsLeft(1);
     }
 
     @Test
     public void testConfirmEditByTab() {
 
-        precondition().activeTasks("a").completedTasks("b").atAllFilter().prepare();
+        precondition().completedTasks("b").atAllFilter().prepare();
 
-        startEdit("a", "a edited").pressTab();
         startEdit("b", "b edited").pressTab();
         assertTasks("a edited", "b edited");
         assertItemsLeft(1);

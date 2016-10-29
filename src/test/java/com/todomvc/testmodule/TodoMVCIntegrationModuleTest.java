@@ -1,4 +1,4 @@
-package com.todomvc.testmodules;
+package com.todomvc.testmodule;
 
 import org.junit.Test;
 
@@ -37,6 +37,4 @@ public class TodoMVCIntegrationModuleTest {
         delete("b");
         assertNoVisibleTasks();
     }
-
-
 }

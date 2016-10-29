@@ -1,4 +1,4 @@
-package com.todomvc.testmodules;
+package com.todomvc.testmodule;
 
 import org.junit.Test;
 
@@ -7,7 +7,6 @@ import static com.todomvc.modules.TaskManagerModule.*;
 
 
 public class AtActiveFilterModuleTest {
-
 
     @Test
     public void testCreate() {
