@@ -13,11 +13,11 @@ public class AtCompletedFilterTest {
     @Test
     public void testDelete() {
 
-        precondition().completedTasks("a", "b").atCompletedFilter().prepare();
+        precondition().activeTasks("a").completedTasks("b").atCompletedFilter().prepare();
 
-        page.delete("a");
-        page.assertVisibleTasks("b");
-        page.assertItemsLeft(0);
+        page.delete("b");
+        page.assertNoVisibleTasks();
+        page.assertItemsLeft(1);
     }
 
     @Test

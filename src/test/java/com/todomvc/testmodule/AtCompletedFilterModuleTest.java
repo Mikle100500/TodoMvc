@@ -10,11 +10,11 @@ public class AtCompletedFilterModuleTest {
     @Test
     public void testDelete() {
 
-        precondition().completedTasks("a", "b").atCompletedFilter().prepare();
+        precondition().activeTasks("a").completedTasks("b").atCompletedFilter().prepare();
 
-        delete("a");
-        assertVisibleTasks("b");
-        assertItemsLeft(0);
+        delete("b");
+        assertNoVisibleTasks();
+        assertItemsLeft(1);
     }
 
     @Test

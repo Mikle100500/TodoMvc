@@ -31,11 +31,11 @@ public class AtActiveFilterModuleTest {
     @Test
     public void testDelete() {
 
-        precondition().activeTasks("a", "b").atActiveFilter().prepare();
+        precondition().activeTasks("a").completedTasks("b").atActiveFilter().prepare();
 
         delete("a");
-        assertVisibleTasks("b");
-        assertItemsLeft(1);
+        assertNoVisibleTasks();
+        assertItemsLeft(0);
     }
 
     @Test
