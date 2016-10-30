@@ -1,4 +1,4 @@
-package com.todomvc.modules;
+package com.todomvc.pages.testmodule;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
@@ -12,7 +12,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
 
-public class TaskManagerModule {
+public class TaskManager {
 
     public static ElementsCollection tasks = $$("#todo-list>li");
     public static final SelenideElement newTodo = $("#new-todo");

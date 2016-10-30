@@ -1,6 +1,6 @@
 package com.todomvc.testpage;
 
-import com.todomvc.pages.TaskManagerPage;
+import com.todomvc.pages.testpage.TaskManagerPage;
 import org.junit.Test;
 
 import static com.todomvc.helpers.Preconditions.precondition;

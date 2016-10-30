@@ -3,7 +3,7 @@ package com.todomvc.testmodule;
 import org.junit.Test;
 
 import static com.todomvc.helpers.Preconditions.precondition;
-import static com.todomvc.modules.TaskManagerModule.*;
+import static com.todomvc.pages.testmodule.TaskManager.*;
 
 
 public class AtActiveFilterModuleTest {
