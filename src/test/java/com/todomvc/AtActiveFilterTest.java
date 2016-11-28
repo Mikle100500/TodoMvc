@@ -1,7 +1,10 @@
-package com.todomvc.testpage;
+package com.todomvc;
 
 import com.todomvc.pages.testpage.TaskManagerPage;
 import org.junit.Test;
+import org.openqa.selenium.Keys;
+
+import javax.security.auth.login.Configuration;
 
 import static com.todomvc.helpers.Preconditions.precondition;
 
@@ -95,7 +98,7 @@ public class AtActiveFilterTest {
 
         precondition().activeTasks("a", "b").atActiveFilter().prepare();
 
-        page.startEdit("b", "b edited").pressEscape();
+        page.startEdit("b", "b edited").sendKeys(Keys.ESCAPE);
         page.assertVisibleTasks("a", "b");
         page.assertItemsLeft(2);
     }
