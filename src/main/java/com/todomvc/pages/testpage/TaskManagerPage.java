@@ -4,6 +4,7 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import ru.yandex.qatools.allure.annotations.Step;
 
 import static com.codeborne.selenide.CollectionCondition.empty;
@@ -65,8 +66,8 @@ public class TaskManagerPage {
 
     @Step
     public SelenideElement startEdit(String oldTaskName, String newTaskName) {
-
-        doubleClick(tasks.find(exactText(oldTaskName)), WebDriverRunner.getWebDriver());
+        WebDriver driver = WebDriverRunner.getWebDriver();
+        doubleClick(oldTaskName, driver);
         return tasks.find(cssClass("editing")).$(".edit").setValue(newTaskName);
     }
 
