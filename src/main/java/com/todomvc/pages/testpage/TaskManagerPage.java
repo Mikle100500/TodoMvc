@@ -45,7 +45,8 @@ public class TaskManagerPage {
 
     @Step
     public void delete(String taskName) {
-        tasks.findBy(exactText(taskName)).hover().find(".destroy").click();
+        tasks.findBy(exactText(taskName)).hover();
+        tasks.findBy(exactText(taskName)).find(".destroy").click();
     }
 
     public void assertTasks(String... taskNames) {
