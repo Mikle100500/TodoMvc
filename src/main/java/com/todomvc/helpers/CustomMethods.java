@@ -1,18 +1,17 @@
 package com.todomvc.helpers;
 
 
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
+
+import static com.codeborne.selenide.Condition.exactText;
+import static com.codeborne.selenide.Selenide.actions;
 
 public class CustomMethods {
 
-    public static SelenideElement doubleClick(String text, WebDriver driver){
-        WebElement findText = driver.findElement(By.linkText(text));
-        Actions action = new Actions(driver);
-        action.moveToElement(findText).doubleClick().perform();
-        return ;
+    public static void doubleClick(String oldTaskName, ElementsCollection tasks){
+        SelenideElement element = tasks.find(exactText(oldTaskName)).find(By.tagName("label"));
+        actions().moveToElement(element).doubleClick().perform();
     }
 }

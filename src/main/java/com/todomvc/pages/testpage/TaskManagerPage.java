@@ -66,8 +66,7 @@ public class TaskManagerPage {
 
     @Step
     public SelenideElement startEdit(String oldTaskName, String newTaskName) {
-        WebDriver driver = WebDriverRunner.getWebDriver();
-        doubleClick(oldTaskName, driver);
+        doubleClick(oldTaskName, tasks);
         return tasks.find(cssClass("editing")).$(".edit").setValue(newTaskName);
     }
 
