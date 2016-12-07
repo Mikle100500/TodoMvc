@@ -2,9 +2,7 @@ package com.todomvc.pages.testpage;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import com.codeborne.selenide.WebDriverRunner;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import ru.yandex.qatools.allure.annotations.Step;
 
 import static com.codeborne.selenide.CollectionCondition.empty;
@@ -12,7 +10,7 @@ import static com.codeborne.selenide.CollectionCondition.exactTexts;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
-import static com.todomvc.helpers.CustomMethods.doubleClick;
+import static com.todomvc.helpers.CustomElementCommands.doubleClick;
 
 
 public class TaskManagerPage {
@@ -67,7 +65,7 @@ public class TaskManagerPage {
 
     @Step
     public SelenideElement startEdit(String oldTaskName, String newTaskName) {
-        doubleClick(oldTaskName, tasks);
+        doubleClick(tasks.find(exactText(oldTaskName)).find(By.tagName("label")));
         return tasks.find(cssClass("editing")).$(".edit").setValue(newTaskName);
     }
 
